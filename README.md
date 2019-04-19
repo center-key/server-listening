@@ -1,5 +1,5 @@
 # server-listening
-<img src=https://centerkey.com/graphics/center-key-logo.svg align=right width=200 alt=logo>
+<img src=https://centerkey.com/graphics/center-key-logo.svg align=right width=180 alt=logo>
 
 _Simple promise to wait for server ready inside a mocha specification_
 
@@ -14,7 +14,7 @@ _Simple promise to wait for server ready inside a mocha specification_
 ## A) Setup
 Install package:
 ```shell
-$ npm install --save-dev server-listening
+npm install --save-dev server-listening
 ```
 Import package:
 ```javascript
@@ -22,19 +22,38 @@ const serverListening = require('server-listening');
 ```
 
 ## B) Usage
+
+### Mocha specification file
 ```javascript
 serverListening.setPort({ flush: require.resolve('../server') });
 const server = require('../server');
 before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
+See example usage in:
+`[hello-world/mocha-spec.js](hello-world/mocha-spec.js)`
 
-### C) Options
+### `setPort()` Options
 | Option    | Meaning                                                   | Default  |
 | --------- | --------------------------------------------------------- | -------- |
 | **port**  | Port number for server (`0` means choose an unused port). | `0`      |
 | **name**  | Environment variable name to store port number.           | `'port'` |
 | **flush** | Flush cache to get fresh server (use `require.resolve()`) | null     |
+
+### Hello World example
+To try out **server-listening** locally, enter the following terminal commands:
+```shell
+git clone https://github.com/center-key/server-listening.git
+cd server-listening/hello-world
+npm install
+npm test
+```
+<img src=https://raw.githubusercontent.com/center-key/server-listening/master/hello-world/screenshot.png width=400 alt=screenshot>
+You can run the server locally:
+```shell
+npm start
+```
+and then use a browser to view the `'Hello, World!'` message at: http://localhost:3300
 
 ---
 **server-listening** is open source under the [MIT License](LICENSE.txt).
