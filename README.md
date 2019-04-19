@@ -30,11 +30,11 @@ after(() =>  serverListening.close(server));
 ```
 
 ### C) Options
-| Option  | Meaning                                                   | Default  |
-| ------- | --------------------------------------------------------- | -------- |
-| `port`  | Port number for server ('0' means choose an unused port). | `0`      |
-| `name`  | Environment variable name to store port number.           | `'port'` |
-| `flush` | Flush cache to get fresh server (use `require.resolve()`) | null     |
+| Option    | Meaning                                                   | Default  |
+| --------- | --------------------------------------------------------- | -------- |
+| **port**  | Port number for server (`0` means choose an unused port). | `0`      |
+| **name**  | Environment variable name to store port number.           | `'port'` |
+| **flush** | Flush cache to get fresh server (use `require.resolve()`) | null     |
 
 ---
 **server-listening** is open source under the [MIT License](LICENSE.txt).
