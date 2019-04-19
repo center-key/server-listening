@@ -1,0 +1,35 @@
+{
+   "name": "server-listening",
+   "version": "0.0.1",
+   "description": "Simple promise to wait for server ready inside a mocha specification",
+   "license": "MIT",
+   "main": "server-listening.js",
+   "repository": "github:center-key/server-listening",
+   "homepage": "https://github.com/center-key/server-listening",
+   "bugs": "https://github.com/center-key/server-listening/issues",
+   "docs": "https://github.com/center-key/server-listening#readme",
+   "author": "Center Key (https://centerkey.com)",
+   "keywords": [
+      "mocha",
+      "promise",
+      "ready",
+      "server",
+      "specification",
+      "wait"
+   ],
+   "jshintConfig": {
+      "esversion": 9,
+      "strict": "implied",
+      "eqeqeq": true,
+      "undef": true,
+      "unused": true,
+      "mocha": true,
+      "node": true
+   },
+   "scripts": {
+      "test": "jshint *.js"
+   },
+   "devDependencies": {
+      "jshint": "~2.10"
+   }
+}
