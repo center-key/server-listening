@@ -1,0 +1,31 @@
+{
+   "name": "hellow-world",
+   "description": "Hello, World!",
+   "version": "0.0.0",
+   "license": "MIT",
+   "main": "server.js",
+   "repository": "github:center-key/hello-world",
+   "jshintConfig": {
+      "esversion": 9,
+      "strict": "implied",
+      "eqeqeq": true,
+      "undef": true,
+      "unused": true,
+      "mocha": true,
+      "node": true
+   },
+   "scripts": {
+      "pretest": "jshint *.js",
+      "test": "mocha *-spec.js"
+   },
+   "dependencies": {
+      "express": "~4.16"
+   },
+   "devDependencies": {
+      "fetch-json": "~2.2",
+      "jshint": "~2.10.2",
+      "mocha": "~6.1",
+      "node-fetch": "~2.3",
+      "server-listening": "~0.0"
+   }
+}

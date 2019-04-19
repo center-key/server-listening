@@ -10,6 +10,7 @@
    "docs": "https://github.com/center-key/server-listening#readme",
    "author": "Center Key (https://centerkey.com)",
    "keywords": [
+      "javascript",
       "mocha",
       "promise",
       "ready",
@@ -27,8 +28,9 @@
       "node": true
    },
    "scripts": {
-      "test": "jshint *.js"
+      "test": "jshint **/*.js"
    },
+   "dependencies": {},
    "devDependencies": {
       "jshint": "~2.10"
    }
