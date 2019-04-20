@@ -23,7 +23,7 @@ const serverListening = require('server-listening');
 
 ## B) Usage
 
-### Mocha specification file
+### 1. Mocha specification file
 ```javascript
 serverListening.setPort({ flush: require.resolve('../server') });
 const server = require('../server');
@@ -31,16 +31,16 @@ before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
 See example usage in:
-`[hello-world/mocha-spec.js](hello-world/mocha-spec.js)`
+[hello-world/mocha-spec.js](hello-world/mocha-spec.js)
 
-### `setPort()` Options
+### 2. `setPort()` Options
 | Option    | Meaning                                                   | Default  |
 | --------- | --------------------------------------------------------- | -------- |
 | **port**  | Port number for server (`0` means choose an unused port). | `0`      |
 | **name**  | Environment variable name to store port number.           | `'port'` |
 | **flush** | Flush cache to get fresh server (use `require.resolve()`) | null     |
 
-### Hello World example
+## C) Hello World example
 To try out **server-listening** locally, enter the following terminal commands:
 ```shell
 git clone https://github.com/center-key/server-listening.git
@@ -48,7 +48,8 @@ cd server-listening/hello-world
 npm install
 npm test
 ```
-<img src=https://raw.githubusercontent.com/center-key/server-listening/master/hello-world/screenshot.png width=400 alt=screenshot>
+<img src=https://raw.githubusercontent.com/center-key/server-listening/master/hello-world/screenshot.png width=800 alt=screenshot>
+
 You can run the server locally:
 ```shell
 npm start
