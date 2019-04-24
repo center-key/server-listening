@@ -28,10 +28,12 @@
       "node": true
    },
    "scripts": {
-      "test": "jshint **/*.js"
+      "pretest": "jshint **/*.js",
+      "test": "mocha spec"
    },
    "dependencies": {},
    "devDependencies": {
-      "jshint": "~2.10"
+      "jshint": "~2.10",
+      "mocha": "~6.1"
    }
 }
