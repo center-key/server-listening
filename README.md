@@ -63,7 +63,7 @@ $ npm test
 <img src=https://raw.githubusercontent.com/center-key/server-listening/master/hello-world/screenshot.png
 width=800 alt=screenshot>
 
-You can run the server locally:
+You can also run the server locally:
 ```shell
 $ npm start
 ```

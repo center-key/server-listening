@@ -15,8 +15,8 @@ describe('The server-listening package', () => {
       assert.deepEqual(actual, expected);
       });
 
-   it('contains the functions: setPort(), ready(), close()', () => {
-      const names = ['setPort', 'ready', 'close'];
+   it('contains the functions: setPort(), ready(), handleDom(), close()', () => {
+      const names = ['setPort', 'ready', 'handleDom', 'close'];
       const actual =   { functions: Object.keys(serverListening).sort() };
       const expected = { functions: names.sort() };
       assert.deepEqual(actual, expected);
@@ -24,7 +24,7 @@ describe('The server-listening package', () => {
 
    it('functions are the correct type', () => {
       const actual =   { types: Object.values(serverListening).map(v => typeof v) };
-      const expected = { types: ['function', 'function', 'function'] };
+      const expected = { types: ['function', 'function', 'function', 'function'] };
       assert.deepEqual(actual, expected);
       });
 
@@ -50,6 +50,16 @@ describe('The ready() function', () => {
       const actual =   { promise: serverListening.ready(mockServer) instanceof Promise };
       const expected = { promise: true };
       assert.deepEqual(actual, expected);
+      });
+
+   });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+describe('The handleDom() function', () => {
+
+   it('throws and error if the DOM is missing', () => {
+      const callhandleDom = () => serverListening.handleDom(null);
+      assert.throws(callhandleDom, /serverListening - Unable to load DOM: object/);
       });
 
    });

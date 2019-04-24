@@ -33,6 +33,7 @@
    },
    "dependencies": {},
    "devDependencies": {
+      "jsdom": "~15.0",
       "jshint": "~2.10",
       "mocha": "~6.1"
    }
