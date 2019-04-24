@@ -1,4 +1,4 @@
-// server-listening
+// server-listening ~ github.com/center-key/server-listening ~ MIT License
 
 const serverListening = {
    setPort(options = null) {
@@ -9,12 +9,11 @@ const serverListening = {
          delete require.cache[flush];  //flush cache to get fresh server
       },
    ready(server) {
-      const executor = (resolve) => server.listening ? resolve() : server.on('listening', resolve);
-      return new Promise(executor);
+      const waitForReady = (done) => server.on('listening', done);
+      return new Promise((resolve) => server.listening ? resolve() : waitForReady(resolve));
       },
    close(server) {
-      const executor = (resolve) => server.close(resolve);
-      return new Promise(executor);
+      return new Promise((resolve) => server.close(resolve));
       }
    };
 
