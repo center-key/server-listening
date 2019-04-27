@@ -1,6 +1,6 @@
 {
    "name": "server-listening",
-   "version": "0.0.2",
+   "version": "0.0.3",
    "description": "Simple promise to wait for server ready inside a mocha specification",
    "license": "MIT",
    "main": "server-listening.js",
@@ -31,9 +31,10 @@
       "pretest": "jshint **/*.js",
       "test": "mocha spec"
    },
-   "dependencies": {},
+   "dependencies": {
+      "jsdom": "~15.0"
+   },
    "devDependencies": {
-      "jsdom": "~15.0",
       "jshint": "~2.10",
       "mocha": "~6.1"
    }

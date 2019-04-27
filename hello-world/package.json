@@ -23,9 +23,9 @@
    },
    "devDependencies": {
       "fetch-json": "~2.2",
-      "jshint": "~2.10.2",
+      "jshint": "~2.10",
       "mocha": "~6.1",
-      "node-fetch": "~2.3",
+      "node-fetch": "~2.4",
       "server-listening": "~0.0"
    }
 }
