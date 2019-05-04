@@ -14,22 +14,19 @@ const serverListening = {
       const waitForReady = (done) => server.on('listening', done);
       return new Promise((resolve) => server.listening ? resolve() : waitForReady(resolve));
       },
-   handleDom(dom) {  //sets window (and $ if jQuery is present) for use in specification cases
-      if (dom instanceof JSDOM === false)
-         throw Error('serverListening - Unable to load DOM: ' + typeof dom);
-      let done;
-      dom.window.onload = () => {
-         global.window = dom.window;
-         global.$ = window.jQuery;
-         done(dom);
-         };
-      return new Promise((resolve) => done = resolve);
-      },
    close(server) {
       return new Promise((resolve) => server.close(resolve));
       },
-   deleteDom() {
-      global.window.close();  //sets window.document to undefined
+   jsdomOnLoad(dom) {
+      if (dom instanceof JSDOM === false)
+         throw Error('serverListening - Unable to load DOM: ' + typeof dom);
+      let done;
+      dom.window.onload = () => done(dom);
+      return new Promise((resolve) => done = resolve);
+      },
+   jsdomCloseWindow(dom) {
+      dom.window.close();
+      return new Promise((resolve) => resolve(dom));
       }
    };
 

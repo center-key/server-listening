@@ -15,8 +15,8 @@ describe('The server-listening package', () => {
       assert.deepEqual(actual, expected);
       });
 
-   it('contains the functions: setPort(), ready(), handleDom(), close(), deleteDom()', () => {
-      const names = ['setPort', 'ready', 'handleDom', 'close', 'deleteDom'];
+   it('contains the functions: setPort(), ready(), close(), jsdomOnLoad(), jsdomCloseWindow()', () => {
+      const names = ['setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow'];
       const actual =   { functions: Object.keys(serverListening).sort() };
       const expected = { functions: names.sort() };
       assert.deepEqual(actual, expected);
@@ -55,16 +55,6 @@ describe('The ready() function', () => {
    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-describe('The handleDom() function', () => {
-
-   it('throws an error if the DOM is missing', () => {
-      const callhandleDom = () => serverListening.handleDom(null);
-      assert.throws(callhandleDom, /serverListening - Unable to load DOM: object/);
-      });
-
-   });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('The close() function', () => {
 
    it('returns a promise when given a mock server', () => {
@@ -77,14 +67,24 @@ describe('The close() function', () => {
    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-describe('The deleteDom() function', () => {
+describe('The jsdomOnLoad() function', () => {
 
-   it('runs the window.close() function', () => {
+   it('throws an error if the DOM is missing', () => {
+      const callhandleDom = () => serverListening.jsdomOnLoad(null);
+      assert.throws(callhandleDom, /serverListening - Unable to load DOM: object/);
+      });
+
+   });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+describe('The jsdomCloseWindow() function', () => {
+
+   it('runs the dom.window.close() function and returns a promise', () => {
       let status = null;
-      global.window = { close: () => status = 'done' };
-      serverListening.deleteDom();
-      const actual =   { close: status };
-      const expected = { close: 'done' };
+      const dom = { window: { close: () => status = 'done' } };
+      const p = serverListening.jsdomCloseWindow(dom);
+      const actual =   { close: status, promise: p instanceof Promise };
+      const expected = { close: 'done', promise: true };
       assert.deepEqual(actual, expected);
       });
 

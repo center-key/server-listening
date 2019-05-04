@@ -52,38 +52,52 @@ let port;
 before(() => serverListening.ready(server).then(() => port = server.address().port));
 ```
 
-### 4. `handleDom()` and `deleteDom()` for jsdom support
-```javascript
-// Mocha Specification Cases
+### 4. jsdom support
+The two helper functions `jsdomOnLoad()` and `jsdomCloseWindow()` can be used with the
+`JSDOM.fromURL()` function to load a web page before the mocha tests run and then close the window
+when the tests are finished.
 
+```javascript
 // Imports
 const assert =          require('assert').strict;
-const serverListening = require('server-listening');
 const { JSDOM } =       require('jsdom');
+const serverListening = require('server-listening');
 
 // Setup
-serverListening.setPort({ flush: require.resolve('../server') });
-const server = require('../server');
-const url = 'http://localhost:' + server.address().port;
-before(() => serverListening.ready(server)
-   .then(() => JSDOM.fromURL(url, { resources: 'usable', runScripts: 'dangerously' }))
-   .then(serverListening.handleDom)  //set window and $ for use in specification cases
+const url = 'https://pretty-print-json.js.org/';
+let dom;
+before(() => JSDOM.fromURL(url, { resources: 'usable', runScripts: 'dangerously' })
+   .then(serverListening.jsdomOnLoad)
+   .then((jsdom) => dom = jsdom)
    );
-after(() => serverListening.close(server).then(serverListening.deleteDom));
+after(() => serverListening.jsdomCloseWindow(dom));
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
+
+   it('has the correct URL -> ' + url, () => {
+      const actual =   { url: dom.window.location.href };
+      const expected = { url: url };
+      assert.deepEqual(actual, expected);
+      });
 
    it('has exactly one header, main, and footer', () => {
       const actual =   {
-         header: $('body >header').length,
-         main:   $('body >main').length,
-         footer: $('body >footer').length
+         header: dom.window.$('body >header').length,
+         main:   dom.window.$('body >main').length,
+         footer: dom.window.$('body >footer').length
          };
       const expected = { header: 1, main: 1, footer: 1 };
       assert.deepEqual(actual, expected);
       });
 
    });
+```
+Above mocha test will output:
+```
+  The web page
+    ✓ has the correct URL -> https://pretty-print-json.js.org/
+    ✓ has exactly one header, main, and footer
 ```
 
 ## C) Hello World example
