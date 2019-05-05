@@ -72,13 +72,25 @@ releaseInstructions() {
    echo
    }
 
-buildProject() {
+runSpec() {
    cd $projectHome
-   echo "Build:"
+   echo "Specification:"
+   npm test
+   echo
+   }
+
+helloWorld() {
+   cd $projectHome
+   echo "Hello World:"
+   cd hello-world
+   npm install
+   npm update
+   npm outdated
    npm test
    echo
    }
 
 setupTools
 releaseInstructions
-buildProject
+runSpec
+helloWorld
