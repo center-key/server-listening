@@ -1,12 +1,19 @@
+// Pi Server
+
+// Imports
 const express = require('express');
 
-// const port = process.env.port || 3000;
-
+// Setup
+const port = process.env.port || 31415;
 const app = express();
 
-app.get('/', (request, response) => response.json({ message: 'Hello, World'}));
+// Routes
+app.get('/', (request, response) => response.json({ pi: 3.14159265 }));
 
-const server = app.listen(0);
-server.on('listening',() => console.log('--- Server is listening on port: ', server.address().port));
+// Server
+const server = app.listen(port);
+server.on('listening', () => console.log('  --- server listening on port:', server.address().port));
+server.on('close',     () => console.log('  --- server shutdown'));
 
+// Module
 module.exports = server;

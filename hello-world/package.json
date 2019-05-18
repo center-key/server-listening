@@ -19,13 +19,13 @@
       "test": "mocha *-spec.js"
    },
    "dependencies": {
-      "express": "~4.16"
+      "express": "~4.17"
    },
    "devDependencies": {
       "fetch-json": "~2.2",
       "jshint": "~2.10",
       "mocha": "~6.1",
-      "node-fetch": "~2.5",
+      "node-fetch": "~2.6",
       "server-listening": "~0.1"
    }
 }

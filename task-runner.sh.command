@@ -82,6 +82,7 @@ runSpec() {
 helloWorld() {
    cd $projectHome
    echo "Hello World:"
+   pwd
    cd hello-world
    npm install
    npm update

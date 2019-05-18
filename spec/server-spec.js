@@ -1,28 +1,32 @@
 // Mocha Specification Cases
-const fetchJson = require('fetch-json');
 
 // Imports
-const assert = require('assert').strict;
+const assert =    require('assert').strict;
+const fetchJson = require('fetch-json');
 
 // Package
 const serverListening = require('../server-listening');
 
+describe('Server specification', () => {
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-describe('Server Spec', () => {
+describe('A mocha test with server-listening', () => {
+   serverListening.setPort({ flush: require.resolve('./server') });
+   const server = require('./server');
+   before(() => serverListening.ready(server));
+   after(() =>  serverListening.close(server));
 
-   describe('A Mocha test with serverListening', () => {
-      const server = require('./server');
-      before(() => serverListening.ready(server));
-      after(() =>  serverListening.close(server));
-
-      it('waits for the server and returns the correct data', () => 
-         fetchJson.get('http://localhost:' + server.address().port).then((data) => {
-            const actual = data;
-            const expected = { message: 'Hello, World' };
-            assert.deepEqual(actual, expected);
-            })
-         );
-
+   it('waits for the server and returns the correct data', () => {
+      const url = 'http://localhost:' + server.address().port;
+      const handle = (data) => {
+         const actual =   data;
+         const expected = { pi: 3.14159265 };
+         assert.deepEqual(actual, expected);
+         };
+      return fetchJson.get(url).then(handle);
       });
+
    });
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+});

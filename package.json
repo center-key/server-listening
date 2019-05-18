@@ -28,17 +28,17 @@
       "node": true
    },
    "scripts": {
-      "pretest": "jshint *.js spec/*.js",
+      "pretest": "jshint *.js hello-world/*.js spec/*.js",
       "test": "mocha spec/*-spec.js"
    },
    "dependencies": {
-      "jsdom": "~15.0"
+      "jsdom": "~15.1"
    },
    "devDependencies": {
-      "express": "^4.16.4",
-      "fetch-json": "^2.2.5",
+      "express": "~4.17",
+      "fetch-json": "^2.2",
       "jshint": "~2.10",
       "mocha": "~6.1",
-      "node-fetch": "^2.5.0"
+      "node-fetch": "~2.6"
    }
 }
