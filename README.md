@@ -26,15 +26,20 @@ const serverListening = require('server-listening');
 
 ### 1. Mocha specification file
 ```javascript
-serverListening.setPort({ flush: require.resolve('../server') });
 const server = require('../server');
 before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
-See example usage in:
+Example usage:
 [hello-world/mocha-spec.js](hello-world/mocha-spec.js)
 
-### 2. `setPort()` Options
+### 2. `setPort()` options
+The `setPort(options)` function is just a handy way to set the environment variable for the
+HTTP port and to flush the server package so the mocha test gets a fresh server.&nbsp; This
+function is just for convenience and is not required.
+```javascript
+serverListening.setPort({ flush: require.resolve('../server') });
+```
 | Option    | Meaning                                                   | Default  |
 | --------- | --------------------------------------------------------- | -------- |
 | **port**  | Port number for server (`0` means choose an unused port). | `0`      |
@@ -42,7 +47,7 @@ See example usage in:
 | **flush** | Flush cache to get fresh server (use `require.resolve()`) | null     |
 
 ### 3. Leveraging promises
-The functions `serverListening.ready(server)` and `serverListening.close(server)` return a
+The `ready(server)` and `close(server)` functions return a
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises), enabling
 chaining of operations.
 
@@ -99,6 +104,8 @@ Above mocha test will output:
     ✓ has the correct URL -> https://pretty-print-json.js.org/
     ✓ has exactly one header, main, and footer
 ```
+Example of loading a page into jsdom from a local node server:
+https://github.com/dnajs/data-dashboard/blob/master/spec/spec.js
 
 ## C) Hello World example
 To try out **server-listening** locally, enter the following terminal commands:
