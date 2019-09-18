@@ -30,7 +30,7 @@ const server = require('../server');
 before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
-Example usage:
+Example usage:<br>
 [hello-world/mocha-spec.js](hello-world/mocha-spec.js)
 
 ### 2. `setPort()` options
@@ -104,7 +104,7 @@ Above mocha test will output:
     ✓ has the correct URL -> https://pretty-print-json.js.org/
     ✓ has exactly one header, main, and footer
 ```
-Example of loading a page into jsdom from a local node server:
+Example of loading a page into jsdom from a local node server:<br>
 https://github.com/dnajs/data-dashboard/blob/master/spec/spec.js
 
 ## C) Hello World example
