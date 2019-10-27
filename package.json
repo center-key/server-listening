@@ -32,7 +32,8 @@
       "test": "mocha spec/*-spec.js"
    },
    "dependencies": {
-      "jsdom": "~15.1"
+      "canvas": "~2.6",
+      "jsdom": "~15.2"
    },
    "devDependencies": {
       "express": "~4.17",
