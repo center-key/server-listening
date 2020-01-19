@@ -73,7 +73,7 @@ describe('The jsdomOnLoad() function', () => {
 
    it('throws an error if the DOM is missing', () => {
       const callhandleDom = () => serverListening.jsdomOnLoad(null);
-      assert.throws(callhandleDom, /serverListening - Unable to load DOM: object/);
+      assert.throws(callhandleDom, 'Error: serverListening - Unable to load DOM: null => null');
       });
 
    });

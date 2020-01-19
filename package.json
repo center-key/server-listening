@@ -31,14 +31,11 @@
       "pretest": "jshint *.js hello-world/*.js spec/*.js",
       "test": "mocha spec/*-spec.js"
    },
-   "dependencies": {
-      "canvas": "~2.6",
-      "jsdom": "~15.2"
-   },
+   "dependencies": {},
    "devDependencies": {
       "express": "~4.17",
       "fetch-json": "~2.2",
-      "jshint": "~2.10",
+      "jshint": "~2.11",
       "mocha": "~7.0",
       "node-fetch": "~2.6"
    }

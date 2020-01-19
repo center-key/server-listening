@@ -1,7 +1,5 @@
 // server-listening ~ github.com/center-key/server-listening ~ MIT License
 
-const { JSDOM } = require('jsdom');
-
 const serverListening = {
    setPort(options = null) {
       const defaults = { port: 0, name: 'port', flush: null };  //port 0 to find unused port
@@ -18,8 +16,9 @@ const serverListening = {
       return new Promise((resolve) => server.close(resolve));
       },
    jsdomOnLoad(dom) {
-      if (dom instanceof JSDOM === false)
-         throw Error('serverListening - Unable to load DOM: ' + typeof dom);
+      const name = dom && dom.constructor && dom.constructor.name;
+      if (name !== 'JSDOM')
+         throw Error(`serverListening - Unable to load DOM: ${name} => ${String(dom)}`);
       let done;
       dom.window.onload = () => done(dom);
       return new Promise((resolve) => done = resolve);
