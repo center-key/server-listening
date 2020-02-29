@@ -8,6 +8,7 @@ const port = process.env.port || 31415;
 const app = express();
 
 // Routes
+app.use(express.json());
 app.get('/', (request, response) => response.json({ pi: 3.14159265 }));
 
 // Server

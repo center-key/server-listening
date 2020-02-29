@@ -8,6 +8,7 @@ const port = process.env.port || 3300;
 const app = express();
 
 // Routes
+app.use(express.json());
 app.get('/', (request, response) => response.json({ message: 'Hello, World!' }));
 
 // Server
