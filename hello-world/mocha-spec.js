@@ -1,7 +1,7 @@
 // Mocha Specification Cases
 
 // Imports
-const assert =          require('assert').strict;
+const assert =          require('assert');
 const fetchJson =       require('fetch-json');
 const serverListening = require('server-listening');
 
@@ -16,7 +16,9 @@ describe('The REST endpoint', () => {
 
    it('responds with the "Hello, World!" message', (done) => {
       const handleData = (data) => {
-         assert.deepEqual(data, { message: 'Hello, World!' });
+         const actual =   data;
+         const expected = { message: 'Hello, World!' };
+         assert.deepStrictEqual(actual, expected);
          done();
          };
       const url = 'http://localhost:' + server.address().port;

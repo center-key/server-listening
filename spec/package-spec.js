@@ -1,7 +1,7 @@
 // Mocha Specification Cases
 
 // Imports
-const assert = require('assert').strict;
+const assert = require('assert');
 
 // Package
 const serverListening = require('../server-listening');
@@ -14,20 +14,20 @@ describe('The server-listening package', () => {
    it('is exported as an object', () => {
       const actual =   { type: typeof serverListening };
       const expected = { type: 'object' };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    it('contains the functions: setPort(), ready(), close(), jsdomOnLoad(), jsdomCloseWindow()', () => {
       const names = ['setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow'];
       const actual =   { functions: Object.keys(serverListening).sort() };
       const expected = { functions: names.sort() };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    it('functions are the correct type', () => {
       const actual =   { types: Object.values(serverListening).map(v => typeof v) };
       const expected = { types: ['function', 'function', 'function', 'function', 'function'] };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    });
@@ -39,7 +39,7 @@ describe('The setPort() function', () => {
       serverListening.setPort({ port: 12345, name: 'mockPort'});
       const actual =   { port: process.env.mockPort };
       const expected = { port: '12345' };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    });
@@ -51,7 +51,7 @@ describe('The ready() function', () => {
       const mockServer = { listening: true };
       const actual =   { promise: serverListening.ready(mockServer) instanceof Promise };
       const expected = { promise: true };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    });
@@ -63,7 +63,7 @@ describe('The close() function', () => {
       const mockServer = { close: (callback) => callback() };
       const actual =   { promise: serverListening.close(mockServer) instanceof Promise };
       const expected = { promise: true };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    });
@@ -87,7 +87,7 @@ describe('The jsdomCloseWindow() function', () => {
       const p = serverListening.jsdomCloseWindow(dom);
       const actual =   { close: status, promise: p instanceof Promise };
       const expected = { close: 'done', promise: true };
-      assert.deepEqual(actual, expected);
+      assert.deepStrictEqual(actual, expected);
       });
 
    });

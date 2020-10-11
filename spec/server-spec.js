@@ -1,7 +1,7 @@
 // Mocha Specification Cases
 
 // Imports
-const assert =    require('assert').strict;
+const assert =    require('assert');
 const fetchJson = require('fetch-json');
 
 // Package
@@ -21,7 +21,7 @@ describe('A mocha test with server-listening', () => {
       const handle = (data) => {
          const actual =   data;
          const expected = { pi: 3.14159265 };
-         assert.deepEqual(actual, expected);
+         assert.deepStrictEqual(actual, expected);
          };
       return fetchJson.get(url).then(handle);
       });
