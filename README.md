@@ -5,7 +5,6 @@ _Simple promise to wait for server ready inside a mocha specification_
 
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/server-listening/blob/master/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/server-listening.svg)](https://www.npmjs.com/package/server-listening)
-[![Dependencies](https://david-dm.org/center-key/server-listening/status.svg)](https://david-dm.org/center-key/server-listening)
 [![Vulnerabilities](https://snyk.io/test/github/center-key/server-listening/badge.svg)](https://snyk.io/test/github/center-key/server-listening)
 [![Build](https://travis-ci.org/center-key/server-listening.svg)](https://travis-ci.org/center-key/server-listening)
 
