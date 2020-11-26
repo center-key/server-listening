@@ -39,7 +39,7 @@
       "express": "~4.17",
       "fetch-json": "~2.2",
       "jshint": "~2.12",
-      "mocha": "~8.1",
+      "mocha": "~8.2",
       "node-fetch": "~2.6"
    }
 }
