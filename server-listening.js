@@ -10,10 +10,10 @@ const serverListening = {
       },
    ready(server) {
       const waitForReady = (done) => server.on('listening', done);
-      return new Promise((resolve) => server.listening ? resolve() : waitForReady(resolve));
+      return new Promise(resolve => server.listening ? resolve() : waitForReady(resolve));
       },
    close(server) {
-      return new Promise((resolve) => server.close(resolve));
+      return new Promise(resolve => server.close(resolve));
       },
    jsdomOnLoad(dom) {
       const name = dom && dom.constructor && dom.constructor.name;
@@ -21,11 +21,12 @@ const serverListening = {
          throw Error(`serverListening - Unable to load DOM: ${name} => ${String(dom)}`);
       let done;
       dom.window.onload = () => done(dom);
-      return new Promise((resolve) => done = resolve);
+      return new Promise(resolve => done = resolve);
       },
    jsdomCloseWindow(dom) {
-      dom.window.close();
-      return new Promise((resolve) => resolve(dom));
+      if (dom)
+         dom.window.close();
+      return new Promise(resolve => resolve(dom));
       }
    };
 
