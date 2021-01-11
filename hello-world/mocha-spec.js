@@ -2,7 +2,7 @@
 
 // Imports
 const assert =          require('assert');
-const fetchJson =       require('fetch-json');
+const { fetchJson } =   require('fetch-json');
 const serverListening = require('server-listening');
 
 // Setup

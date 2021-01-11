@@ -1,8 +1,8 @@
 // Mocha Specification Cases
 
 // Imports
-const assert =    require('assert');
-const fetchJson = require('fetch-json');
+const assert =        require('assert');
+const { fetchJson } = require('fetch-json');
 
 // Package
 const serverListening = require('../server-listening');
