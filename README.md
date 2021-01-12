@@ -18,14 +18,18 @@ $ npm install --save-dev server-listening
 ```
 Import package:
 ```javascript
-const serverListening = require('server-listening');
+import { serverListening } from 'server-listening';
+```
+Or if using the older CommonJS format:
+```javascript
+const { serverListening } = require('server-listening');
 ```
 
 ## B) Usage
 
 ### 1. Mocha specification file
 ```javascript
-const server = require('../server');
+import { server } from '../server.js';
 before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
@@ -34,16 +38,14 @@ Example usage:<br>
 
 ### 2. `setPort()` options
 The `setPort(options)` function is just a handy way to set the environment variable for the
-HTTP port and to flush the server package so the mocha test gets a fresh server.&nbsp; This
-function is just for convenience and is not required.
+HTTP port.&nbsp; This function is just for convenience and is not required.
 ```javascript
-serverListening.setPort({ flush: require.resolve('../server') });
+serverListening.setPort({ port: 9000 });
 ```
 | Option    | Meaning                                                   | Default  |
 | --------- | --------------------------------------------------------- | -------- |
 | **port**  | Port number for server (`0` means choose an unused port). | `0`      |
 | **name**  | Environment variable name to store port number.           | `'port'` |
-| **flush** | Flush cache to get fresh server (use `require.resolve()`) | null     |
 
 ### 3. Leveraging promises
 The `ready(server)` and `close(server)` functions return a
@@ -63,9 +65,9 @@ when the tests are finished.
 
 ```javascript
 // Imports
-const assert =          require('assert');
-const serverListening = require('server-listening');
-const { JSDOM } =       require('jsdom');
+import assert from 'assert';
+import { serverListening } from 'server-listening';
+import { JSDOM } from 'jsdom';
 
 // Setup
 const url = 'https://pretty-print-json.js.org/';
@@ -125,6 +127,19 @@ Above mocha test will output:
 ```
 Example of loading a page into jsdom from a local node server:<br>
 https://github.com/dnajs/data-dashboard/blob/master/spec/spec.js
+
+### 5. TypeScript declarations
+The **TypeScript Declaration File** file is [server-listening.d.ts](dist/server-listening.d.ts) in
+the **dist** folder.
+
+The declarations provide type information about the API, such as the options for calling
+`serverListening.setPort()`::
+```typescript
+type ServerListeningOptions = {
+   port?:  number,  //0 = find unused port
+   name?:  string,  //environment variable to pass port number
+   };
+```
 
 ## C) Hello World example
 To try out **server-listening** locally, enter the following terminal commands:

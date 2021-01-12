@@ -3,6 +3,7 @@
    "description": "Hello, World!",
    "version": "0.0.0",
    "license": "MIT",
+   "type": "module",
    "main": "server.js",
    "repository": "github:center-key/hello-world",
    "jshintConfig": {

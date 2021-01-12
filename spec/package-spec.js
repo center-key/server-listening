@@ -1,10 +1,10 @@
 // Mocha Specification Cases
 
 // Imports
-const assert = require('assert');
+import assert from 'assert';
 
 // Package
-const serverListening = require('../server-listening');
+import { serverListening } from '../dist/server-listening.js';
 
 describe('Package specification', () => {
 

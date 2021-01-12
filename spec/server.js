@@ -1,7 +1,7 @@
 // Pi Server
 
 // Imports
-const express = require('express');
+import express from 'express';
 
 // Setup
 const port = process.env.port || 31415;
@@ -17,4 +17,4 @@ server.on('listening', () => console.log('  --- server listening on port:', serv
 server.on('close',     () => console.log('  --- server shutdown'));
 
 // Module
-module.exports = server;
+export { server };
