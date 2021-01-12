@@ -1,6 +1,6 @@
 {
    "name": "server-listening",
-   "version": "0.1.8",
+   "version": "0.2.0",
    "description": "Simple promise to wait for server ready inside a mocha specification",
    "license": "MIT",
    "type": "module",
