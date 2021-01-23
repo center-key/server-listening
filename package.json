@@ -21,6 +21,7 @@
       "promise",
       "ready",
       "server",
+      "server-listening",
       "specification",
       "typescript",
       "wait"
@@ -67,8 +68,8 @@
       "@types/express": "~4.17",
       "@types/jsdom": "~16.2",
       "@types/node": "~14.14",
-      "@typescript-eslint/eslint-plugin": "~4.13",
-      "@typescript-eslint/parser": "~4.13",
+      "@typescript-eslint/eslint-plugin": "~4.14",
+      "@typescript-eslint/parser": "~4.14",
       "eslint": "~7.18",
       "express": "~4.17",
       "fetch-json": "~2.4",
