@@ -22,7 +22,7 @@ import { serverListening } from 'server-listening';
 ```
 Or if using the older CommonJS format:
 ```javascript
-const { serverListening } = require('server-listening');
+const { serverListening } = require('server-listening');  //deprecated
 ```
 
 ## B) Usage

@@ -1,7 +1,7 @@
 {
    "name": "server-listening",
    "version": "0.2.0",
-   "description": "Simple promise to wait for server ready inside a mocha specification",
+   "description": "Simple promise to wait for server ready inside a mocha specification (written in TypeScript)",
    "license": "MIT",
    "type": "module",
    "main": "dist/server-listening.umd.cjs",
@@ -55,13 +55,13 @@
       ]
    },
    "scripts": {
-      "clean": "rimraf build dist **/.DS_Store && shx mkdir dist",
+      "clean": "    rimraf build dist **/.DS_Store && shx mkdir dist",
       "postclean": "tsc --version && npm run build-esm && npm run build-dts && npm run build-umd",
       "build-esm": "tsc --project . && shx cp build/*.js dist/",
       "build-dts": "name=$(basename $PWD) && shx head -n 1 build/*.js | cat - build/*.d.ts > dist/$name.d.ts",
       "build-umd": "name=$(basename $PWD) && tsc --project . --module UMD --outDir build/umd && shx cp build/umd/*.js dist/$name.umd.cjs",
-      "pretest": "jshint spec/*.js && eslint --max-warnings 0 . --ext .ts && npm run clean",
-      "test": "mocha spec/*-spec.js"
+      "pretest": "  jshint spec/*.js && eslint --max-warnings 0 . --ext .ts && npm run clean",
+      "test": "     mocha spec/*-spec.js"
    },
    "dependencies": {},
    "devDependencies": {
@@ -70,7 +70,7 @@
       "@types/node": "~14.14",
       "@typescript-eslint/eslint-plugin": "~4.14",
       "@typescript-eslint/parser": "~4.14",
-      "eslint": "~7.18",
+      "eslint": "~7.19",
       "express": "~4.17",
       "fetch-json": "~2.4",
       "jsdom": "~16.4",
