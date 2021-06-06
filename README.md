@@ -7,6 +7,7 @@ _Simple promise to wait for server ready inside a mocha specification_
 [![npm](https://img.shields.io/npm/v/server-listening.svg)](https://www.npmjs.com/package/server-listening)
 [![Vulnerabilities](https://snyk.io/test/github/center-key/server-listening/badge.svg)](https://snyk.io/test/github/center-key/server-listening)
 [![Build](https://travis-ci.org/center-key/server-listening.svg)](https://travis-ci.org/center-key/server-listening)
+[![Build](https://github.com/center-key/server-listening/workflows/build/badge.svg)](https://github.com/center-key/server-listening/actions?query=workflow%3Abuild)
 
 **server-listening** is just a little helper utility to reduce the amount of boilerplate code
 needed to startup servers when running multiple mocha files.
@@ -38,7 +39,7 @@ Example usage:<br>
 
 ### 2. `setPort()` options
 The `setPort(options)` function is just a handy way to set the environment variable for the
-HTTP port.&nbsp; This function is just for convenience and is not required.
+HTTP port.&nbsp; This function is for convenience and is not required.
 ```javascript
 serverListening.setPort({ port: 9000 });
 ```
