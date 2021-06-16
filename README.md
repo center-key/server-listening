@@ -3,10 +3,9 @@
 
 _Simple promise to wait for server ready inside a mocha specification_
 
-[![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/server-listening/blob/master/LICENSE.txt)
+[![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/server-listening/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/server-listening.svg)](https://www.npmjs.com/package/server-listening)
 [![Vulnerabilities](https://snyk.io/test/github/center-key/server-listening/badge.svg)](https://snyk.io/test/github/center-key/server-listening)
-[![Build](https://travis-ci.org/center-key/server-listening.svg)](https://travis-ci.org/center-key/server-listening)
 [![Build](https://github.com/center-key/server-listening/workflows/build/badge.svg)](https://github.com/center-key/server-listening/actions?query=workflow%3Abuild)
 
 **server-listening** is just a little helper utility to reduce the amount of boilerplate code
@@ -127,7 +126,7 @@ Above mocha test will output:
     ✓ has a 🚀 traveling to 🪐!
 ```
 Example of loading a page into jsdom from a local node server:<br>
-https://github.com/dnajs/data-dashboard/blob/master/spec/spec.js
+https://github.com/dnajs/data-dashboard/blob/main/spec/spec.js
 
 ### 5. TypeScript declarations
 The **TypeScript Declaration File** file is [server-listening.d.ts](dist/server-listening.d.ts) in
@@ -142,7 +141,7 @@ type ServerListeningOptions = {
    };
 ```
 
-## C) Hello World example
+## C) Hello World Example
 To try out **server-listening** locally, enter the following terminal commands:
 ```shell
 $ git clone https://github.com/center-key/server-listening.git
@@ -150,7 +149,7 @@ $ cd server-listening/hello-world
 $ npm install
 $ npm test
 ```
-<img src=https://raw.githubusercontent.com/center-key/server-listening/master/hello-world/screenshot.png
+<img src=https://raw.githubusercontent.com/center-key/server-listening/main/hello-world/screenshot.png
 width=800 alt=screenshot>
 
 You can also run the server locally:
