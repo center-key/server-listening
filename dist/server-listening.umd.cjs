@@ -13,7 +13,7 @@
     exports.serverListening = void 0;
     const serverListening = {
         setPort(options) {
-            const defaults = { port: 0, name: 'port' }; //port 0 to find unused port
+            const defaults = { port: 0, name: 'port' };
             const { port, name } = { ...defaults, ...options };
             process.env[name] = String(port);
         },

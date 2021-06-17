@@ -84,8 +84,8 @@ describe('The jsdomCloseWindow() function', () => {
    it('runs the dom.window.close() function and returns a promise', () => {
       let status = null;
       const dom = { window: { close: () => status = 'done' } };
-      const p = serverListening.jsdomCloseWindow(dom);
-      const actual =   { close: status, promise: p instanceof Promise };
+      const promise = serverListening.jsdomCloseWindow(dom);
+      const actual =   { close: status, promise: promise instanceof Promise };
       const expected = { close: 'done', promise: true };
       assert.deepStrictEqual(actual, expected);
       });

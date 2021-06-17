@@ -1,7 +1,7 @@
 // server-listening ~ github.com/center-key/server-listening ~ MIT License
 const serverListening = {
     setPort(options) {
-        const defaults = { port: 0, name: 'port' }; //port 0 to find unused port
+        const defaults = { port: 0, name: 'port' };
         const { port, name } = { ...defaults, ...options };
         process.env[name] = String(port);
     },
