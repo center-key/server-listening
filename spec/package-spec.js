@@ -1,6 +1,7 @@
 // Mocha Specification Cases
 
 // Imports
+import assert from 'assert';
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 
 // Package
