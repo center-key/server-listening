@@ -65,7 +65,7 @@ when the tests are finished.
 
 ```javascript
 // Imports
-import assert from 'assert';
+import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { serverListening } from 'server-listening';
 import { JSDOM } from 'jsdom';
 
@@ -86,7 +86,7 @@ describe('The web page', () => {
    it('has the correct URL -> ' + url, () => {
       const actual =   { url: dom.window.location.href };
       const expected = { url: url };
-      assert.deepStrictEqual(actual, expected);
+      assertDeepStrictEqual(actual, expected);
       });
 
    it('has exactly one header, main, and footer', () => {
@@ -97,7 +97,7 @@ describe('The web page', () => {
          footer: $('body >footer').length,
          };
       const expected = { header: 1, main: 1, footer: 1 };
-      assert.deepStrictEqual(actual, expected);
+      assertDeepStrictEqual(actual, expected);
       });
 
    });
@@ -111,7 +111,7 @@ describe('The document content', () => {
       const html = dom.window.document.documentElement.outerHTML;
       const actual =   { '🚀': !!html.match(/🚀/g), '🪐': !!html.match(/🪐/g) };
       const expected = { '🚀': true,                '🪐': true };
-      assert.deepStrictEqual(actual, expected);
+      assertDeepStrictEqual(actual, expected);
       });
 
    });
