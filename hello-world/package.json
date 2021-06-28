@@ -17,7 +17,7 @@
    },
    "scripts": {
       "pretest": "jshint *.js",
-      "test": "mocha *-spec.js"
+      "test": "mocha *.spec.js"
    },
    "dependencies": {
       "express": "~4.17"
