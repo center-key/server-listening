@@ -4,12 +4,19 @@
    "description": "Simple promise to wait for server ready inside a mocha specification (written in TypeScript)",
    "license": "MIT",
    "type": "module",
-   "main": "dist/server-listening.umd.cjs",
    "module": "dist/server-listening.js",
+   "main": "dist/server-listening.umd.cjs",
    "types": "dist/server-listening.d.ts",
    "files": [
       "dist"
    ],
+   "exports": {
+      ".": {
+         "import": "./dist/server-listening.js",
+         "require": "./dist/server-listening.umd.cjs"
+      },
+      "./": "./dist/"
+   },
    "repository": "github:center-key/server-listening",
    "homepage": "https://github.com/center-key/server-listening",
    "bugs": "https://github.com/center-key/server-listening/issues",
