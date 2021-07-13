@@ -1,9 +1,39 @@
 // server-listening ~ github.com/center-key/server-listening ~ MIT License
-import { JSDOM } from 'jsdom';
+/// <reference types="node" />
+/// <reference types="cheerio" />
+import httpTerminator from 'http-terminator';
+import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
-declare type ServerListeningOptions = {
+export declare type ServerListeningOptions = {
     port?: number;
     name?: string;
+};
+export declare type StartWebServerOptions = {
+    folder?: string;
+    port?: number;
+    verbose?: boolean;
+};
+export declare type Web = {
+    server: Server;
+    terminator: httpTerminator.HttpTerminator;
+    folder: string;
+    url: string;
+    port: number;
+    verbose: boolean;
+};
+export declare type LoadWebPageOptions = {
+    jsdom?: BaseOptions;
+    verbose?: boolean;
+};
+export declare type Page = {
+    url: string;
+    dom: JSDOM;
+    window: DOMWindow;
+    document: Document;
+    title: string;
+    html: string;
+    $: cheerio.Root;
+    verbose: boolean;
 };
 declare const serverListening: {
     setPort(options?: ServerListeningOptions | undefined): void;
@@ -11,5 +41,10 @@ declare const serverListening: {
     close(server: Server): Promise<Server | Error | undefined>;
     jsdomOnLoad(dom: JSDOM): Promise<JSDOM>;
     jsdomCloseWindow(dom: JSDOM): Promise<JSDOM>;
+    log(...args: unknown[]): void;
+    startWebServer(options?: StartWebServerOptions | undefined): Promise<Web>;
+    shutdownWebServer(web: Web): Promise<void>;
+    loadWebPage(url: string, options?: LoadWebPageOptions | undefined): Promise<Page>;
+    closeWebPage(page: Page): Promise<Page>;
 };
 export { serverListening };

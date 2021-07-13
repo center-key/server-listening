@@ -9,7 +9,7 @@ _Simple promise to wait for server ready inside a mocha specification_
 [![Build](https://github.com/center-key/server-listening/workflows/build/badge.svg)](https://github.com/center-key/server-listening/actions?query=workflow%3Abuild)
 
 **server-listening** is just a little helper utility to reduce the amount of boilerplate code
-needed to startup servers when running multiple mocha files.
+needed to startup servers when running mocha specifications.
 
 ## A) Setup
 Install package:
@@ -26,6 +26,10 @@ const { serverListening } = require('server-listening');  //deprecated
 ```
 
 ## B) Usage
+The original low-level API is described below.&nbsp;
+For the newer high-level API to start a web server (`localhost`) and load a web page, see
+[start-web-server.spec.js](spec/start-web-server.spec.js) and
+[load-web-page.spec.js](spec/load-web-page.spec.js)
 
 ### 1. Mocha specification file
 ```javascript
