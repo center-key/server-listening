@@ -18,16 +18,18 @@ describe('The server-listening package', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('contains the functions: setPort(), ready(), close(), jsdomOnLoad(), jsdomCloseWindow()', () => {
-      const names = ['setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow'];
+   it('contains the expected functions', () => {
+      const names = ['setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow',
+         'log', 'startWebServer', 'shutdownWebServer', 'loadWebPage', 'closeWebPage'];
       const actual =   { functions: Object.keys(serverListening).sort() };
       const expected = { functions: names.sort() };
       assertDeepStrictEqual(actual, expected);
       });
 
    it('functions are the correct type', () => {
-      const actual =   { types: Object.values(serverListening).map(v => typeof v) };
-      const expected = { types: ['function', 'function', 'function', 'function', 'function'] };
+      const valueTypes = Object.values(serverListening).map(value => typeof value);
+      const actual =   { types: valueTypes };
+      const expected = { types: [...valueTypes].fill('function') };
       assertDeepStrictEqual(actual, expected);
       });
 

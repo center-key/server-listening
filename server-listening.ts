@@ -1,11 +1,42 @@
 // server-listening ~ github.com/center-key/server-listening ~ MIT License
 
-import { JSDOM } from 'jsdom';
+import cheerio from 'cheerio';
+import express from 'express';
+import httpTerminator from 'http-terminator';
+import { AddressInfo } from 'net';
+import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
 
-type ServerListeningOptions = {
-   port?:  number,  //0 = find unused port
-   name?:  string,  //environment variable to pass port number
+export type ServerListeningOptions = {
+   port?: number,  //0 = find unused port
+   name?: string,  //environment variable to pass port number
+   };
+export type StartWebServerOptions = {
+   folder?:  string,
+   port?:    number,
+   verbose?: boolean,
+   };
+export type Web = {
+   server:     Server,
+   terminator: httpTerminator.HttpTerminator,
+   folder:     string,
+   url:        string,
+   port:       number,
+   verbose:    boolean,
+   };
+export type LoadWebPageOptions = {
+   jsdom?: BaseOptions,
+   verbose?: boolean,
+   };
+export type Page = {
+   url:      string,
+   dom:      JSDOM,
+   window:   DOMWindow,
+   document: Document,
+   title:    string,
+   html:     string,
+   $:        cheerio.Root,  //like jQuery
+   verbose:  boolean,
    };
 
 const serverListening = {
@@ -33,7 +64,62 @@ const serverListening = {
       if (dom)
          dom.window.close();
       return new Promise(resolve => resolve(dom));
-      }
+      },
+   log(...args: unknown[]): void {
+      console.log('  [' + new Date().toISOString() + ']', ...args);
+      },
+   startWebServer(options?: StartWebServerOptions): Promise<Web> {
+      const defaults = { folder: '.', port: 0, verbose: true };
+      const settings = { ...defaults, ...options };
+      const server = express().use(express.static(settings.folder)).listen(settings.port);
+      const terminator = httpTerminator.createHttpTerminator({ server });
+      const port =         () => (<AddressInfo>server.address()).port;
+      const url =          () => 'http://localhost:' + String(port()) + '/';
+      const logListening = () => serverListening.log('Web Server - listening:', server.listening, port(), url());
+      const logClose =     () => serverListening.log('Web Server - shutdown:', !server.listening);
+      const web = (): Web => ({
+         server:     server,
+         terminator: terminator,
+         folder:     settings.folder,
+         url:        url(),
+         port:       port(),
+         verbose:    settings.verbose,
+         });
+      let done: (web: Web) => void;
+      server.on('listening', () => done(web()));
+      if (settings.verbose)
+         server.on('listening', logListening).on('close', logClose);
+      return new Promise(resolve => done = resolve);
+      },
+   shutdownWebServer(web: Web): Promise<void> {
+      return web.terminator.terminate();
+      },
+   loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Page> {
+      const jsdomOptions: BaseOptions = { resources: 'usable', runScripts: 'dangerously' };
+      const defaults = { jsdom: jsdomOptions, verbose: true };
+      const settings = { ...defaults, ...options };
+      if (settings.verbose)
+         serverListening.log('Web Page - loading:', url);
+      const page = (jsdom: JSDOM) => ({
+         url:      url,
+         dom:      jsdom,
+         window:   jsdom.window,
+         document: jsdom.window.document,
+         title:    jsdom.window.document.title,
+         html:     jsdom.window.document.documentElement.outerHTML,
+         $:        cheerio.load(jsdom.window.document.documentElement.outerHTML),
+         verbose:  settings.verbose,
+         });
+      return JSDOM.fromURL(url, settings.jsdom)
+         .then(serverListening.jsdomOnLoad)
+         .then(jsdom => page(jsdom));
+      },
+   closeWebPage(page: Page): Promise<Page> {
+      if (page.verbose)
+         serverListening.log('Web Page - closing:', page.url);
+      page.window.close();
+      return new Promise(resolve => resolve(page));
+      },
    };
 
 export { serverListening };
