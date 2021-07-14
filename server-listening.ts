@@ -16,7 +16,7 @@ export type StartWebServerOptions = {
    port?:    number,
    verbose?: boolean,
    };
-export type Httpx = {
+export type StaticHttp = {
    server:     Server,
    terminator: httpTerminator.HttpTerminator,
    folder:     string,
@@ -28,7 +28,7 @@ export type LoadWebPageOptions = {
    jsdom?: BaseOptions,
    verbose?: boolean,
    };
-export type Page = {
+export type Web = {
    url:      string,
    dom:      JSDOM,
    window:   DOMWindow,
@@ -68,7 +68,7 @@ const serverListening = {
    log(...args: unknown[]): void {
       console.log('  [' + new Date().toISOString() + ']', ...args);
       },
-   startWebServer(options?: StartWebServerOptions): Promise<Httpx> {
+   startWebServer(options?: StartWebServerOptions): Promise<StaticHttp> {
       const defaults = { folder: '.', port: 0, verbose: true };
       const settings = { ...defaults, ...options };
       const server = express().use(express.static(settings.folder)).listen(settings.port);
@@ -77,7 +77,7 @@ const serverListening = {
       const url =          () => 'http://localhost:' + String(port()) + '/';
       const logListening = () => serverListening.log('Web Server - listening:', server.listening, port(), url());
       const logClose =     () => serverListening.log('Web Server - shutdown:', !server.listening);
-      const httpx = (): Httpx => ({
+      const staticHttp = (): StaticHttp => ({
          server:     server,
          terminator: terminator,
          folder:     settings.folder,
@@ -85,22 +85,22 @@ const serverListening = {
          port:       port(),
          verbose:    settings.verbose,
          });
-      let done: (httpx: Httpx) => void;
-      server.on('listening', () => done(httpx()));
+      let done: (staticHttp: StaticHttp) => void;
+      server.on('listening', () => done(staticHttp()));
       if (settings.verbose)
          server.on('listening', logListening).on('close', logClose);
       return new Promise(resolve => done = resolve);
       },
-   shutdownWebServer(httpx: Httpx): Promise<void> {
-      return httpx.terminator.terminate();
+   shutdownWebServer(staticHttp: StaticHttp): Promise<void> {
+      return staticHttp.terminator.terminate();
       },
-   loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Page> {
+   loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web> {
       const jsdomOptions: BaseOptions = { resources: 'usable', runScripts: 'dangerously' };
       const defaults = { jsdom: jsdomOptions, verbose: true };
       const settings = { ...defaults, ...options };
       if (settings.verbose)
          serverListening.log('Web Page - loading:', url);
-      const page = (jsdom: JSDOM) => ({
+      const web = (jsdom: JSDOM) => ({
          url:      url,
          dom:      jsdom,
          window:   jsdom.window,
@@ -112,13 +112,13 @@ const serverListening = {
          });
       return JSDOM.fromURL(url, settings.jsdom)
          .then(serverListening.jsdomOnLoad)
-         .then(jsdom => page(jsdom));
+         .then(jsdom => web(jsdom));
       },
-   closeWebPage(page: Page): Promise<Page> {
-      if (page.verbose)
-         serverListening.log('Web Page - closing:', page.url);
-      page.window.close();
-      return new Promise(resolve => resolve(page));
+   closeWebPage(web: Web): Promise<Web> {
+      if (web.verbose)
+         serverListening.log('Web Page - closing:', web.url);
+      web.window.close();
+      return new Promise(resolve => resolve(web));
       },
    };
 
