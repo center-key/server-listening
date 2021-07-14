@@ -27,9 +27,11 @@ const { serverListening } = require('server-listening');  //deprecated
 
 ## B) Usage
 The original low-level API is described below.&nbsp;
-For the newer high-level API to start a web server (`localhost`) and load a web page, see
+For the newer high-level API to start a web server (`localhost`) and load a web page (`jsdom`), see
 [start-web-server.spec.js](spec/start-web-server.spec.js) and
 [load-web-page.spec.js](spec/load-web-page.spec.js)
+(for similar functionality using Puppeteer instead, see the
+[puppeteer-browser-ready](https://github.com/center-key/puppeteer-browser-ready) project).
 
 ### 1. Mocha specification file
 ```javascript
@@ -129,7 +131,7 @@ Above mocha test will output:
   The document content
     ✓ has a 🚀 traveling to 🪐!
 ```
-Example of loading a page into jsdom from a local node server:<br>
+Example of loading a web page into jsdom from a local node server:<br>
 https://github.com/dnajs/data-dashboard/blob/main/spec/spec.js
 
 ### 5. TypeScript declarations

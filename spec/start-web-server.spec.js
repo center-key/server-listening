@@ -7,21 +7,21 @@ import { serverListening } from '../dist/server-listening.js';  //replace with: 
 // Setup
 const options = { folder: 'spec/web-root' };
 const webPath = 'sample.html';
-let staticHttp;  //fields: server, terminator, folder, url, port, verbose
+let http;  //fields: server, terminator, folder, url, port, verbose
 
 describe('Start Web Server specification', () => {
-   before(() => serverListening.startWebServer(options).then(staticHttpInst => staticHttp = staticHttpInst));
-   after(() =>  serverListening.shutdownWebServer(staticHttp));
+   before(() => serverListening.startWebServer(options).then(httpInst => http = httpInst));
+   after(() =>  serverListening.shutdownWebServer(http));
 
 /////////////////////////////////////////////////////////////////////////////////////
 describe('The sample web page', () => {
    let web;  //fields: url, dom, window, document, title, html, $, verbose
-   before(() => serverListening.loadWebPage(staticHttp.url + webPath).then(webInst => web = webInst));
+   before(() => serverListening.loadWebPage(http.url + webPath).then(webInst => web = webInst));
    after(() =>  serverListening.closeWebPage(web));
 
    it('has the correct URL', () => {
       const actual =   { url: web.window.location.href };
-      const expected = { url: staticHttp.url + webPath };
+      const expected = { url: http.url + webPath };
       assertDeepStrictEqual(actual, expected);
       });
 

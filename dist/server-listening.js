@@ -41,7 +41,7 @@ const serverListening = {
         const url = () => 'http://localhost:' + String(port()) + '/';
         const logListening = () => serverListening.log('Web Server - listening:', server.listening, port(), url());
         const logClose = () => serverListening.log('Web Server - shutdown:', !server.listening);
-        const web = () => ({
+        const http = () => ({
             server: server,
             terminator: terminator,
             folder: settings.folder,
@@ -50,13 +50,13 @@ const serverListening = {
             verbose: settings.verbose,
         });
         let done;
-        server.on('listening', () => done(web()));
+        server.on('listening', () => done(http()));
         if (settings.verbose)
             server.on('listening', logListening).on('close', logClose);
         return new Promise(resolve => done = resolve);
     },
-    shutdownWebServer(web) {
-        return web.terminator.terminate();
+    shutdownWebServer(http) {
+        return http.terminator.terminate();
     },
     loadWebPage(url, options) {
         const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
@@ -64,7 +64,7 @@ const serverListening = {
         const settings = { ...defaults, ...options };
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
-        const page = (jsdom) => ({
+        const web = (jsdom) => ({
             url: url,
             dom: jsdom,
             window: jsdom.window,
@@ -76,13 +76,13 @@ const serverListening = {
         });
         return JSDOM.fromURL(url, settings.jsdom)
             .then(serverListening.jsdomOnLoad)
-            .then(jsdom => page(jsdom));
+            .then(jsdom => web(jsdom));
     },
-    closeWebPage(page) {
-        if (page.verbose)
-            serverListening.log('Web Page - closing:', page.url);
-        page.window.close();
-        return new Promise(resolve => resolve(page));
+    closeWebPage(web) {
+        if (web.verbose)
+            serverListening.log('Web Page - closing:', web.url);
+        web.window.close();
+        return new Promise(resolve => resolve(web));
     },
 };
 export { serverListening };

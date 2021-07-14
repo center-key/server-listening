@@ -16,7 +16,7 @@ export type StartWebServerOptions = {
    port?:    number,
    verbose?: boolean,
    };
-export type StaticHttp = {
+export type Http = {
    server:     Server,
    terminator: httpTerminator.HttpTerminator,
    folder:     string,
@@ -68,7 +68,7 @@ const serverListening = {
    log(...args: unknown[]): void {
       console.log('  [' + new Date().toISOString() + ']', ...args);
       },
-   startWebServer(options?: StartWebServerOptions): Promise<StaticHttp> {
+   startWebServer(options?: StartWebServerOptions): Promise<Http> {
       const defaults = { folder: '.', port: 0, verbose: true };
       const settings = { ...defaults, ...options };
       const server = express().use(express.static(settings.folder)).listen(settings.port);
@@ -77,7 +77,7 @@ const serverListening = {
       const url =          () => 'http://localhost:' + String(port()) + '/';
       const logListening = () => serverListening.log('Web Server - listening:', server.listening, port(), url());
       const logClose =     () => serverListening.log('Web Server - shutdown:', !server.listening);
-      const staticHttp = (): StaticHttp => ({
+      const http = (): Http => ({
          server:     server,
          terminator: terminator,
          folder:     settings.folder,
@@ -85,14 +85,14 @@ const serverListening = {
          port:       port(),
          verbose:    settings.verbose,
          });
-      let done: (staticHttp: StaticHttp) => void;
-      server.on('listening', () => done(staticHttp()));
+      let done: (http: Http) => void;
+      server.on('listening', () => done(http()));
       if (settings.verbose)
          server.on('listening', logListening).on('close', logClose);
       return new Promise(resolve => done = resolve);
       },
-   shutdownWebServer(staticHttp: StaticHttp): Promise<void> {
-      return staticHttp.terminator.terminate();
+   shutdownWebServer(http: Http): Promise<void> {
+      return http.terminator.terminate();
       },
    loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web> {
       const jsdomOptions: BaseOptions = { resources: 'usable', runScripts: 'dangerously' };

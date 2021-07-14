@@ -3,9 +3,7 @@
 // Imports
 import assert from 'assert';
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
-
-// Package
-import { serverListening } from '../dist/server-listening.js';
+import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
 
 describe('Package specification', () => {
 

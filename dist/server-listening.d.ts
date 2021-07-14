@@ -13,7 +13,7 @@ export declare type StartWebServerOptions = {
     port?: number;
     verbose?: boolean;
 };
-export declare type Web = {
+export declare type Http = {
     server: Server;
     terminator: httpTerminator.HttpTerminator;
     folder: string;
@@ -25,7 +25,7 @@ export declare type LoadWebPageOptions = {
     jsdom?: BaseOptions;
     verbose?: boolean;
 };
-export declare type Page = {
+export declare type Web = {
     url: string;
     dom: JSDOM;
     window: DOMWindow;
@@ -42,9 +42,9 @@ declare const serverListening: {
     jsdomOnLoad(dom: JSDOM): Promise<JSDOM>;
     jsdomCloseWindow(dom: JSDOM): Promise<JSDOM>;
     log(...args: unknown[]): void;
-    startWebServer(options?: StartWebServerOptions | undefined): Promise<Web>;
-    shutdownWebServer(web: Web): Promise<void>;
-    loadWebPage(url: string, options?: LoadWebPageOptions | undefined): Promise<Page>;
-    closeWebPage(page: Page): Promise<Page>;
+    startWebServer(options?: StartWebServerOptions | undefined): Promise<Http>;
+    shutdownWebServer(http: Http): Promise<void>;
+    loadWebPage(url: string, options?: LoadWebPageOptions | undefined): Promise<Web>;
+    closeWebPage(web: Web): Promise<Web>;
 };
 export { serverListening };
