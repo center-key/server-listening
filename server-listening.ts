@@ -16,7 +16,7 @@ export type StartWebServerOptions = {
    port?:    number,
    verbose?: boolean,
    };
-export type Web = {
+export type Httpx = {
    server:     Server,
    terminator: httpTerminator.HttpTerminator,
    folder:     string,
@@ -68,7 +68,7 @@ const serverListening = {
    log(...args: unknown[]): void {
       console.log('  [' + new Date().toISOString() + ']', ...args);
       },
-   startWebServer(options?: StartWebServerOptions): Promise<Web> {
+   startWebServer(options?: StartWebServerOptions): Promise<Httpx> {
       const defaults = { folder: '.', port: 0, verbose: true };
       const settings = { ...defaults, ...options };
       const server = express().use(express.static(settings.folder)).listen(settings.port);
@@ -77,7 +77,7 @@ const serverListening = {
       const url =          () => 'http://localhost:' + String(port()) + '/';
       const logListening = () => serverListening.log('Web Server - listening:', server.listening, port(), url());
       const logClose =     () => serverListening.log('Web Server - shutdown:', !server.listening);
-      const web = (): Web => ({
+      const httpx = (): Httpx => ({
          server:     server,
          terminator: terminator,
          folder:     settings.folder,
@@ -85,14 +85,14 @@ const serverListening = {
          port:       port(),
          verbose:    settings.verbose,
          });
-      let done: (web: Web) => void;
-      server.on('listening', () => done(web()));
+      let done: (httpx: Httpx) => void;
+      server.on('listening', () => done(httpx()));
       if (settings.verbose)
          server.on('listening', logListening).on('close', logClose);
       return new Promise(resolve => done = resolve);
       },
-   shutdownWebServer(web: Web): Promise<void> {
-      return web.terminator.terminate();
+   shutdownWebServer(httpx: Httpx): Promise<void> {
+      return httpx.terminator.terminate();
       },
    loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Page> {
       const jsdomOptions: BaseOptions = { resources: 'usable', runScripts: 'dangerously' };

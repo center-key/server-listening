@@ -2,28 +2,26 @@
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
-
-// Package
-import { serverListening } from '../dist/server-listening.js';
+import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
 
 // Setup
 const options = { folder: 'spec/web-root' };
 const webPath = 'sample.html';
-let web;
+let httpx;  //fields: server, terminator, folder, url, port, verbose
 
 describe('Start Web Server specification', () => {
-   before(() => serverListening.startWebServer(options).then((webInst) => web = webInst));
-   after(() =>  serverListening.shutdownWebServer(web));
+   before(() => serverListening.startWebServer(options).then(httpxInst => httpx = httpxInst));
+   after(() =>  serverListening.shutdownWebServer(httpx));
 
 /////////////////////////////////////////////////////////////////////////////////////
 describe('The sample web page', () => {
-   let page;
-   before(() => serverListening.loadWebPage(web.url + webPath).then(pageInst => page = pageInst));
+   let page;  //fields: url, dom, window, document, title, html, $, verbose
+   before(() => serverListening.loadWebPage(httpx.url + webPath).then(pageInst => page = pageInst));
    after(() =>  serverListening.closeWebPage(page));
 
    it('has the correct URL', () => {
       const actual =   { url: page.window.location.href };
-      const expected = { url: web.url + webPath };
+      const expected = { url: httpx.url + webPath };
       assertDeepStrictEqual(actual, expected);
       });
 
