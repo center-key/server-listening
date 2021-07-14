@@ -6,7 +6,7 @@ import { fetchJson } from 'fetch-json';
 import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
 
 // Server
-import { server } from './server.js';
+import { server } from './fixtures/server.js';
 
 describe('Server specification', () => {
 

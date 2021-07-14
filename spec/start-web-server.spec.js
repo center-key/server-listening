@@ -5,7 +5,7 @@ import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
 
 // Setup
-const options = { folder: 'spec/web-root' };
+const options = { folder: 'spec/fixtures' };
 const webPath = 'sample.html';
 let http;  //fields: server, terminator, folder, url, port, verbose
 
