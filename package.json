@@ -70,7 +70,7 @@
       "build-esm": "name=$(basename $PWD) && tsc --project . && shx head -n 1 $name.ts | cat - build/$name.js > dist/$name.js",
       "build-dts": "name=$(basename $PWD) && shx head -n 1 $name.ts | cat - build/$name.d.ts > dist/$name.d.ts",
       "build-umd": "name=$(basename $PWD) && tsc --project . --module UMD --outDir build/umd && shx head -n 1 $name.ts | cat - build/umd/$name.js > dist/$name.umd.cjs",
-      "pretest": "  jshint spec/*.js && eslint --max-warnings 0 . --ext .ts && npm run clean",
+      "pretest": "  jshint . --exclude '**/node_modules,build,dist' && eslint --max-warnings 0 . --ext .ts && npm run clean",
       "test": "     mocha spec/*.spec.js"
    },
    "dependencies": {
