@@ -99,7 +99,6 @@
       "node-fetch": "~3.0",
       "npm-run-all2": "~5.0",
       "rimraf": "~3.0",
-      "shx": "~0.3",
       "typescript": "~4.4",
       "w3c-html-validator": "~0.8"
    }
