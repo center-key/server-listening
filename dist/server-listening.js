@@ -1,4 +1,4 @@
-//! server-listening v0.3.2 ~ https://github.com/center-key/server-listening ~ MIT License
+//! server-listening v0.3.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import cheerio from 'cheerio';
 import express from 'express';
