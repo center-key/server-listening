@@ -1,4 +1,4 @@
-//! server-listening v0.3.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         jsdomOnLoad(dom) {
             const name = dom && dom.constructor && dom.constructor.name;
             if (name !== 'JSDOM')
-                throw Error(`serverListening - Unable to load DOM: ${name} => ${String(dom)}`);
+                throw Error(`[server-listening] Unable to load DOM: ${name} => ${String(dom)}`);
             let done;
             dom.window.onload = () => done(dom);
             return new Promise(resolve => done = resolve);

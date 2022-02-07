@@ -1,4 +1,4 @@
-//! server-listening v0.3.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import cheerio from 'cheerio';
 import express from 'express';
@@ -20,7 +20,7 @@ const serverListening = {
     jsdomOnLoad(dom) {
         const name = dom && dom.constructor && dom.constructor.name;
         if (name !== 'JSDOM')
-            throw Error(`serverListening - Unable to load DOM: ${name} => ${String(dom)}`);
+            throw Error(`[server-listening] Unable to load DOM: ${name} => ${String(dom)}`);
         let done;
         dom.window.onload = () => done(dom);
         return new Promise(resolve => done = resolve);
