@@ -1,4 +1,4 @@
-//! server-listening v0.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const serverListening = {
         setPort(options) {
             const defaults = { port: 0, name: 'port' };
-            const { port, name } = { ...defaults, ...options };
+            const { port, name } = Object.assign(Object.assign({}, defaults), options);
             process.env[name] = String(port);
         },
         ready(server) {
@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         },
         startWebServer(options) {
             const defaults = { folder: '.', port: 0, verbose: true };
-            const settings = { ...defaults, ...options };
+            const settings = Object.assign(Object.assign({}, defaults), options);
             const server = (0, express_1.default)().use(express_1.default.static(settings.folder)).listen(settings.port);
             const terminator = http_terminator_1.default.createHttpTerminator({ server });
             const port = () => server.address().port;
@@ -77,7 +77,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         loadWebPage(url, options) {
             const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
             const defaults = { jsdom: jsdomOptions, verbose: true };
-            const settings = { ...defaults, ...options };
+            const settings = Object.assign(Object.assign({}, defaults), options);
             if (settings.verbose)
                 serverListening.log('Web Page - loading:', url);
             const web = (jsdom) => ({

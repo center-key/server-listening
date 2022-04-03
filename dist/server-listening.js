@@ -1,4 +1,4 @@
-//! server-listening v0.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import cheerio from 'cheerio';
 import express from 'express';
@@ -7,7 +7,7 @@ import { JSDOM } from 'jsdom';
 const serverListening = {
     setPort(options) {
         const defaults = { port: 0, name: 'port' };
-        const { port, name } = { ...defaults, ...options };
+        const { port, name } = Object.assign(Object.assign({}, defaults), options);
         process.env[name] = String(port);
     },
     ready(server) {
@@ -35,7 +35,7 @@ const serverListening = {
     },
     startWebServer(options) {
         const defaults = { folder: '.', port: 0, verbose: true };
-        const settings = { ...defaults, ...options };
+        const settings = Object.assign(Object.assign({}, defaults), options);
         const server = express().use(express.static(settings.folder)).listen(settings.port);
         const terminator = httpTerminator.createHttpTerminator({ server });
         const port = () => server.address().port;
@@ -62,7 +62,7 @@ const serverListening = {
     loadWebPage(url, options) {
         const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
         const defaults = { jsdom: jsdomOptions, verbose: true };
-        const settings = { ...defaults, ...options };
+        const settings = Object.assign(Object.assign({}, defaults), options);
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
         const web = (jsdom) => ({

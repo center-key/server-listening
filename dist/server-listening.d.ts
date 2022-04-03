@@ -1,4 +1,4 @@
-//! server-listening v0.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 /// <reference types="cheerio" />
 import httpTerminator from 'http-terminator';
