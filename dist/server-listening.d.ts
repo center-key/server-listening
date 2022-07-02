@@ -1,4 +1,4 @@
-//! server-listening v0.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v0.3.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 /// <reference types="cheerio" />
 import httpTerminator from 'http-terminator';
@@ -36,15 +36,15 @@ export declare type Web = {
     verbose: boolean;
 };
 declare const serverListening: {
-    setPort(options?: ServerListeningOptions | undefined): void;
+    setPort(options?: ServerListeningOptions): void;
     ready(server: Server): Promise<Server>;
     close(server: Server): Promise<Server | Error | undefined>;
     jsdomOnLoad(dom: JSDOM): Promise<JSDOM>;
     jsdomCloseWindow(dom: JSDOM): Promise<JSDOM>;
     log(...args: unknown[]): void;
-    startWebServer(options?: StartWebServerOptions | undefined): Promise<Http>;
+    startWebServer(options?: StartWebServerOptions): Promise<Http>;
     shutdownWebServer(http: Http): Promise<void>;
-    loadWebPage(url: string, options?: LoadWebPageOptions | undefined): Promise<Web>;
+    loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web>;
     closeWebPage(web: Web): Promise<Web>;
 };
 export { serverListening };
