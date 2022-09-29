@@ -7,15 +7,17 @@ import { AddressInfo } from 'net';
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
 
-export type ServerListeningOptions = {
-   port?: number,  //0 = find unused port
-   name?: string,  //environment variable to pass port number
+export type ServerListeningSettings = {
+   port: number,  //0 = find unused port
+   name: string,  //environment variable to pass port number
    };
-export type StartWebServerOptions = {
-   folder?:  string,
-   port?:    number,
-   verbose?: boolean,
+export type ServerListeningOptions = Partial<ServerListeningSettings>;
+export type StartWebServerSettings = {
+   folder:  string,
+   port:    number,
+   verbose: boolean,
    };
+export type StartWebServerOptions = Partial<StartWebServerSettings>;
 export type Http = {
    server:     Server,
    terminator: httpTerminator.HttpTerminator,
@@ -24,10 +26,11 @@ export type Http = {
    port:       number,
    verbose:    boolean,
    };
-export type LoadWebPageOptions = {
-   jsdom?: BaseOptions,
-   verbose?: boolean,
+export type LoadWebPageSettings = {
+   jsdom:   BaseOptions,
+   verbose: boolean,
    };
+export type LoadWebPageOptions = Partial<LoadWebPageSettings>;
 export type Web = {
    url:      string,
    dom:      JSDOM,
@@ -41,7 +44,10 @@ export type Web = {
 
 const serverListening = {
    setPort(options?: ServerListeningOptions): void {
-      const defaults = { port: 0, name: 'port' };  //port 0 to find unused port
+      const defaults = {
+         port:  0,  //port 0 to find unused port
+         name: 'port',
+         };
       const { port, name } = { ...defaults, ...options };
       process.env[name] = String(port);
       },
@@ -69,7 +75,11 @@ const serverListening = {
       console.log('  [' + new Date().toISOString() + ']', ...args);
       },
    startWebServer(options?: StartWebServerOptions): Promise<Http> {
-      const defaults = { folder: '.', port: 0, verbose: true };
+      const defaults = {
+         folder:  '.',
+         port:    0,
+         verbose: true,
+         };
       const settings = { ...defaults, ...options };
       const server = express().use(express.static(settings.folder)).listen(settings.port);
       const terminator = httpTerminator.createHttpTerminator({ server });
