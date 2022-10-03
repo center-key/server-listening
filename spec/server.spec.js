@@ -3,7 +3,7 @@
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { fetchJson } from 'fetch-json';
-import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
+import { serverListening } from '../dist/server-listening.js';
 
 // Server
 import { server } from './fixtures/server.js';

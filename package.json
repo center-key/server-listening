@@ -74,7 +74,7 @@
       "step:07": "add-dist-header build dist",
       "step:08": "html-validator",
       "pretest": "npm-run-all step:*",
-      "test": "mocha spec/*.spec.js"
+      "test": "mocha spec/*.spec.js --retries 1"
    },
    "dependencies": {
       "cheerio": "~1.0.0-rc.12",
@@ -86,10 +86,10 @@
       "@types/cheerio": "~0.22",
       "@types/express": "~4.17",
       "@types/jsdom": "~20.0",
-      "@types/node": "~18.7",
-      "@typescript-eslint/eslint-plugin": "~5.38",
-      "@typescript-eslint/parser": "~5.38",
-      "add-dist-header": "~0.2",
+      "@types/node": "~18.8",
+      "@typescript-eslint/eslint-plugin": "~5.39",
+      "@typescript-eslint/parser": "~5.39",
+      "add-dist-header": "~0.3",
       "assert-deep-strict-equal": "~1.0",
       "copy-file-util": "~0.1",
       "copy-folder-cli": "~0.1",

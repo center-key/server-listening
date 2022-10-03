@@ -2,7 +2,7 @@
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
-import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
+import { serverListening } from '../dist/server-listening.js';
 
 // Setup
 const url = 'https://pretty-print-json.js.org/';

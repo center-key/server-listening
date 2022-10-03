@@ -1,11 +1,11 @@
 // server-listening ~ github.com/center-key/server-listening ~ MIT License
 
-import cheerio from 'cheerio';
-import express from 'express';
-import httpTerminator from 'http-terminator';
 import { AddressInfo } from 'net';
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
-import { Server } from 'http';
+import { Server }     from 'http';
+import cheerio        from 'cheerio';
+import express        from 'express';
+import httpTerminator from 'http-terminator';
 
 export type ServerListeningSettings = {
    port: number,  //0 = find unused port

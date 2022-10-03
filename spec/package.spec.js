@@ -1,10 +1,10 @@
 // Mocha Specification Suite
 
 // Imports
-import assert from 'assert';
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
-import { readdirSync } from 'fs';
-import { serverListening } from '../dist/server-listening.js';  //replace with: ...from 'server-listening';
+import { serverListening } from '../dist/server-listening.js';
+import assert from 'assert';
+import fs from 'fs';
 
 describe('Package specification', () => {
 
@@ -12,7 +12,7 @@ describe('Package specification', () => {
 describe('The "dist" folder', () => {
 
    it('contains the correct files', () => {
-      const actual =   readdirSync('dist').sort();
+      const actual =   fs.readdirSync('dist').sort();
       const expected = ['server-listening.d.ts', 'server-listening.js', 'server-listening.umd.cjs'];
       assertDeepStrictEqual(actual, expected);
       });
