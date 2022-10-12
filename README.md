@@ -132,7 +132,7 @@ Above mocha test will output:
     ✓ has a 🚀 traveling to 🪐!
 ```
 Example of loading a web page into jsdom from a local node server:<br>
-https://github.com/dnajs/data-dashboard/blob/main/spec/spec.js
+https://github.com/dna-engine/data-dashboard/blob/main/spec/spec.js
 
 ### 5. TypeScript declarations
 The **TypeScript Declaration File** file is [server-listening.d.ts](dist/server-listening.d.ts) in
