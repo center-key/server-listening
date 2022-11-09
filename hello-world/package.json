@@ -27,6 +27,6 @@
       "fetch-json": "~3.0",
       "jshint": "~2.13",
       "mocha": "~10.1",
-      "server-listening": "~0.3"
+      "server-listening": "~1.0"
    }
 }
