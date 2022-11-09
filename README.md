@@ -42,7 +42,7 @@ after(() =>  serverListening.close(server));
 Example usage:<br>
 [hello-world/mocha-spec.js](hello-world/mocha-spec.js)
 
-**NOTE**<br>
+**NOTE:**<br>
 Mocha's default timeout is 2,000 milliseconds which often is not enough time for a node server to shutdown.&nbsp;
 Use the `--timeout` flag to correct this problem:
 ```json

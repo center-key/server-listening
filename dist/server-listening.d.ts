@@ -1,18 +1,20 @@
-//! server-listening v0.3.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.0.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 /// <reference types="cheerio" />
-import httpTerminator from 'http-terminator';
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
-export declare type ServerListeningOptions = {
-    port?: number;
-    name?: string;
+import httpTerminator from 'http-terminator';
+export declare type ServerListeningSettings = {
+    port: number;
+    name: string;
 };
-export declare type StartWebServerOptions = {
-    folder?: string;
-    port?: number;
-    verbose?: boolean;
+export declare type ServerListeningOptions = Partial<ServerListeningSettings>;
+export declare type StartWebServerSettings = {
+    folder: string;
+    port: number;
+    verbose: boolean;
 };
+export declare type StartWebServerOptions = Partial<StartWebServerSettings>;
 export declare type Http = {
     server: Server;
     terminator: httpTerminator.HttpTerminator;
@@ -21,10 +23,11 @@ export declare type Http = {
     port: number;
     verbose: boolean;
 };
-export declare type LoadWebPageOptions = {
-    jsdom?: BaseOptions;
-    verbose?: boolean;
+export declare type LoadWebPageSettings = {
+    jsdom: BaseOptions;
+    verbose: boolean;
 };
+export declare type LoadWebPageOptions = Partial<LoadWebPageSettings>;
 export declare type Web = {
     url: string;
     dom: JSDOM;
@@ -36,12 +39,12 @@ export declare type Web = {
     verbose: boolean;
 };
 declare const serverListening: {
-    setPort(options?: ServerListeningOptions): void;
+    setPort(options?: ServerListeningOptions): number;
     ready(server: Server): Promise<Server>;
     close(server: Server): Promise<Server | Error | undefined>;
     jsdomOnLoad(dom: JSDOM): Promise<JSDOM>;
     jsdomCloseWindow(dom: JSDOM): Promise<JSDOM>;
-    log(...args: unknown[]): void;
+    log(...args: unknown[]): string;
     startWebServer(options?: StartWebServerOptions): Promise<Http>;
     shutdownWebServer(http: Http): Promise<void>;
     loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web>;

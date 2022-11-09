@@ -43,13 +43,14 @@ export type Web = {
    };
 
 const serverListening = {
-   setPort(options?: ServerListeningOptions): void {
+   setPort(options?: ServerListeningOptions): number {
       const defaults = {
          port:  0,  //port 0 to find unused port
          name: 'port',
          };
-      const { port, name } = { ...defaults, ...options };
-      process.env[name] = String(port);
+      const settings = { ...defaults, ...options };
+      process.env[settings.name] = String(settings.port);
+      return settings.port;
       },
    ready(server: Server): Promise<Server> {
       const waitForReady = (done: (value: Server) => void): Server => server.on('listening', done);
@@ -71,8 +72,10 @@ const serverListening = {
          dom.window.close();
       return new Promise(resolve => resolve(dom));
       },
-   log(...args: unknown[]): void {
-      console.log('  [' + new Date().toISOString() + ']', ...args);
+   log(...args: unknown[]): string {
+      const timestamp = new Date().toISOString();
+      console.log('  [' + timestamp + ']', ...args);
+      return timestamp;
       },
    startWebServer(options?: StartWebServerOptions): Promise<Http> {
       const defaults = {
@@ -105,7 +108,10 @@ const serverListening = {
       return http.terminator.terminate();
       },
    loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web> {
-      const jsdomOptions: BaseOptions = { resources: 'usable', runScripts: 'dangerously' };
+      const jsdomOptions: BaseOptions = {
+         resources:  'usable',
+         runScripts: 'dangerously',
+         };
       const defaults = { jsdom: jsdomOptions, verbose: true };
       const settings = { ...defaults, ...options };
       if (settings.verbose)

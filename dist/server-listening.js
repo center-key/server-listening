@@ -1,14 +1,18 @@
-//! server-listening v0.3.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.0.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
+import { JSDOM } from 'jsdom';
 import cheerio from 'cheerio';
 import express from 'express';
 import httpTerminator from 'http-terminator';
-import { JSDOM } from 'jsdom';
 const serverListening = {
     setPort(options) {
-        const defaults = { port: 0, name: 'port' };
-        const { port, name } = Object.assign(Object.assign({}, defaults), options);
-        process.env[name] = String(port);
+        const defaults = {
+            port: 0,
+            name: 'port',
+        };
+        const settings = Object.assign(Object.assign({}, defaults), options);
+        process.env[settings.name] = String(settings.port);
+        return settings.port;
     },
     ready(server) {
         const waitForReady = (done) => server.on('listening', done);
@@ -31,10 +35,16 @@ const serverListening = {
         return new Promise(resolve => resolve(dom));
     },
     log(...args) {
-        console.log('  [' + new Date().toISOString() + ']', ...args);
+        const timestamp = new Date().toISOString();
+        console.log('  [' + timestamp + ']', ...args);
+        return timestamp;
     },
     startWebServer(options) {
-        const defaults = { folder: '.', port: 0, verbose: true };
+        const defaults = {
+            folder: '.',
+            port: 0,
+            verbose: true,
+        };
         const settings = Object.assign(Object.assign({}, defaults), options);
         const server = express().use(express.static(settings.folder)).listen(settings.port);
         const terminator = httpTerminator.createHttpTerminator({ server });
@@ -60,7 +70,10 @@ const serverListening = {
         return http.terminator.terminate();
     },
     loadWebPage(url, options) {
-        const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
+        const jsdomOptions = {
+            resources: 'usable',
+            runScripts: 'dangerously',
+        };
         const defaults = { jsdom: jsdomOptions, verbose: true };
         const settings = Object.assign(Object.assign({}, defaults), options);
         if (settings.verbose)
