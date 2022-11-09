@@ -17,17 +17,16 @@
    },
    "scripts": {
       "pretest": "jshint . --exclude-path .gitignore",
-      "test": "mocha *.spec.js"
+      "test": "mocha *.spec.js --timeout 5000 --retries 1"
    },
    "dependencies": {
       "express": "~4.18"
    },
    "devDependencies": {
       "assert-deep-strict-equal": "~1.0",
-      "fetch-json": "~2.7",
+      "fetch-json": "~3.0",
       "jshint": "~2.13",
       "mocha": "~10.1",
-      "node-fetch": "~3.2",
       "server-listening": "~0.3"
    }
 }

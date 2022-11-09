@@ -2,7 +2,7 @@
 
 import { AddressInfo } from 'net';
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
-import { Server }     from 'http';
+import { Server } from 'http';
 import cheerio        from 'cheerio';
 import express        from 'express';
 import httpTerminator from 'http-terminator';

@@ -42,6 +42,15 @@ after(() =>  serverListening.close(server));
 Example usage:<br>
 [hello-world/mocha-spec.js](hello-world/mocha-spec.js)
 
+**NOTE**<br>
+Mocha's default timeout is 2,000 milliseconds which often is not enough time for a node server to shutdown.&nbsp;
+Use the `--timeout` flag to correct this problem:
+```json
+"scripts": {
+   "test": "mocha *.spec.js --timeout 5000"
+}
+```
+
 ### 2. `setPort()` options
 The `setPort(options)` function is just a handy way to set the environment variable for the
 HTTP port.&nbsp; This function is for convenience and is not required.
@@ -84,7 +93,7 @@ const loadWebPage = () => JSDOM.fromURL(url, jsdomOptions)
    .then((jsdom) => dom = jsdom);
 const closeWebPage = () => serverListening.jsdomCloseWindow(dom);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
    before(loadWebPage);
    after(closeWebPage);
@@ -108,7 +117,7 @@ describe('The web page', () => {
 
    });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 describe('The document content', () => {
    before(loadWebPage);
    after(closeWebPage);
