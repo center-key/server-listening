@@ -144,11 +144,10 @@ Example of loading a web page into jsdom from a local node server:<br>
 https://github.com/dna-engine/data-dashboard/blob/main/spec/spec.js
 
 ### 5. TypeScript declarations
-The **TypeScript Declaration File** file is [server-listening.d.ts](dist/server-listening.d.ts) in
-the **dist** folder.
+See the TypeScript declarations at the top of the [server-listening.ts](server-listening.ts) file.
 
 The declarations provide type information about the API, such as the options for calling
-`serverListening.setPort()`::
+`serverListening.setPort()`:
 ```typescript
 type ServerListeningOptions = {
    port?:  number,  //0 = find unused port
