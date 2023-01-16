@@ -13,7 +13,11 @@ describe('The "dist" folder', () => {
 
    it('contains the correct files', () => {
       const actual =   fs.readdirSync('dist').sort();
-      const expected = ['server-listening.d.ts', 'server-listening.js', 'server-listening.umd.cjs'];
+      const expected = [
+         'server-listening.d.ts',
+         'server-listening.js',
+         'server-listening.umd.cjs',
+         ];
       assertDeepStrictEqual(actual, expected);
       });
 
