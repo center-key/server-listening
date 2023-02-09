@@ -1,21 +1,21 @@
-//! server-listening v1.0.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.0.1 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 /// <reference types="cheerio" />
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
 import httpTerminator from 'http-terminator';
-export declare type ServerListeningSettings = {
+export type ServerListeningSettings = {
     port: number;
     name: string;
 };
-export declare type ServerListeningOptions = Partial<ServerListeningSettings>;
-export declare type StartWebServerSettings = {
+export type ServerListeningOptions = Partial<ServerListeningSettings>;
+export type StartWebServerSettings = {
     folder: string;
     port: number;
     verbose: boolean;
 };
-export declare type StartWebServerOptions = Partial<StartWebServerSettings>;
-export declare type Http = {
+export type StartWebServerOptions = Partial<StartWebServerSettings>;
+export type Http = {
     server: Server;
     terminator: httpTerminator.HttpTerminator;
     folder: string;
@@ -23,12 +23,12 @@ export declare type Http = {
     port: number;
     verbose: boolean;
 };
-export declare type LoadWebPageSettings = {
+export type LoadWebPageSettings = {
     jsdom: BaseOptions;
     verbose: boolean;
 };
-export declare type LoadWebPageOptions = Partial<LoadWebPageSettings>;
-export declare type Web = {
+export type LoadWebPageOptions = Partial<LoadWebPageSettings>;
+export type Web = {
     url: string;
     dom: JSDOM;
     window: DOMWindow;
