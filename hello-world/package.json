@@ -24,7 +24,7 @@
    },
    "devDependencies": {
       "assert-deep-strict-equal": "~1.0",
-      "fetch-json": "~3.0",
+      "fetch-json": "~3.1",
       "jshint": "~2.13",
       "mocha": "~10.2",
       "server-listening": "~1.0"
