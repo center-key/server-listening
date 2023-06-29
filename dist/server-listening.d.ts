@@ -1,4 +1,4 @@
-//! server-listening v1.0.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.1.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 /// <reference types="cheerio" />
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
