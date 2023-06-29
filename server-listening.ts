@@ -38,7 +38,7 @@ export type Web = {
    document: Document,
    title:    string,
    html:     string,
-   $:        cheerio.Root,  //like jQuery
+   $:        cheerio.Root,  //library for parsing and manipulating HTML
    verbose:  boolean,
    };
 

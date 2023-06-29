@@ -1,14 +1,14 @@
 # server-listening
 <img src=https://centerkey.com/graphics/center-key-logo.svg align=right width=180 alt=logo>
 
-_Simple promise to wait for server ready inside a mocha specification_
+_Simple promise to wait for server ready or DOM ready inside a mocha specification_
 
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/server-listening/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/server-listening.svg)](https://www.npmjs.com/package/server-listening)
 [![Vulnerabilities](https://snyk.io/test/github/center-key/server-listening/badge.svg)](https://snyk.io/test/github/center-key/server-listening)
 [![Build](https://github.com/center-key/server-listening/workflows/build/badge.svg)](https://github.com/center-key/server-listening/actions/workflows/run-spec-on-push.yaml)
 
-**server-listening** is just a little helper utility to reduce the amount of boilerplate code
+**server-listening** is a lightweight helper utility to reduce the amount of boilerplate code
 needed to startup servers when running mocha specifications.
 
 ## A) Setup
@@ -26,10 +26,11 @@ const { serverListening } = require('server-listening');  //deprecated -- use ES
 ```
 
 ## B) Usage
-The original low-level API is described below.&nbsp;
-For the newer high-level API to start a web server (`localhost`) and load a web page (`jsdom`), see
-[start-web-server.spec.js](spec/start-web-server.spec.js) and
-[load-web-page.spec.js](spec/load-web-page.spec.js)
+Three primary tools:
+* `serverListening.ready(server)` Waits for your node server application to start up
+* `serverListening.startWebServer(options)` Starts and waits for static web server (express), see: [start-web-server.spec.js](spec/start-web-server.spec.js)
+* `serverListening.loadWebPage(url, options)` Uses JSDOM to load and wait for a web page, see: [load-web-page.spec.js](spec/load-web-page.spec.js)
+
 (for similar functionality using Puppeteer instead, see the
 [puppeteer-browser-ready](https://github.com/center-key/puppeteer-browser-ready) project).
 
@@ -40,11 +41,11 @@ before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));
 ```
 Example usage:<br>
-[hello-world/mocha-spec.js](hello-world/mocha-spec.js)
+[hello-world/mocha.spec.js](hello-world/mocha.spec.js)
 
 **NOTE:**<br>
 Mocha's default timeout is 2,000 milliseconds which often is not enough time for a node server to shutdown.&nbsp;
-Use the `--timeout` flag to correct this problem:
+Use the `--timeout` flag to help avoid this problem:
 ```json
 "scripts": {
    "test": "mocha *.spec.js --timeout 5000"
@@ -73,45 +74,35 @@ let port;
 before(() => serverListening.ready(server).then(() => port = server.address().port));
 ```
 
-### 4. jsdom support
-The two helper functions `jsdomOnLoad()` and `jsdomCloseWindow()` can be used with the
-`JSDOM.fromURL()` function to load a web page before the mocha tests run and then close the window
-when the tests are finished.
-
+### 4. Example for serverListening.loadWebPage(url)
 ```javascript
+// Mocha Specification Suite
+
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { serverListening } from 'server-listening';
-import { JSDOM } from 'jsdom';
 
 // Setup
 const url = 'https://pretty-print-json.js.org/';
-const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
-let dom;
-const loadWebPage = () => JSDOM.fromURL(url, jsdomOptions)
-   .then(serverListening.jsdomOnLoad)
-   .then((jsdom) => dom = jsdom);
-const closeWebPage = () => serverListening.jsdomCloseWindow(dom);
+let web;  //fields: url, dom, window, document, title, html, $, verbose
+const loadWebPage =  () => serverListening.loadWebPage(url).then(webInst => web = webInst);
+const closeWebPage = () => serverListening.closeWebPage(web);
 
 ////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
+   const getTags = (elems) => [...elems].map(elem => elem.nodeName.toLowerCase());
    before(loadWebPage);
    after(closeWebPage);
 
    it('has the correct URL -> ' + url, () => {
-      const actual =   { url: dom.window.location.href };
+      const actual =   { url: web.window.location.href };
       const expected = { url: url };
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has exactly one header, main, and footer', () => {
-      const $ = dom.window.$;
-      const actual =   {
-         header: $('body >header').length,
-         main:   $('body >main').length,
-         footer: $('body >footer').length,
-         };
-      const expected = { header: 1, main: 1, footer: 1 };
+   it('has a body with exactly one header, main, and footer', () => {
+      const actual =   getTags(web.document.querySelectorAll('body >*'));
+      const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);
       });
 
@@ -123,7 +114,7 @@ describe('The document content', () => {
    after(closeWebPage);
 
    it('has a 🚀 traveling to 🪐!', () => {
-      const html = dom.window.document.documentElement.outerHTML;
+      const html =     web.document.body.outerHTML;
       const actual =   { '🚀': !!html.match(/🚀/g), '🪐': !!html.match(/🪐/g) };
       const expected = { '🚀': true,                '🪐': true };
       assertDeepStrictEqual(actual, expected);
@@ -135,7 +126,7 @@ Above mocha test will output:
 ```
   The web page
     ✓ has the correct URL -> https://pretty-print-json.js.org/
-    ✓ has exactly one header, main, and footer
+    ✓ has a body with exactly one header, main, and footer
 
   The document content
     ✓ has a 🚀 traveling to 🪐!

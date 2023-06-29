@@ -15,6 +15,7 @@ describe('Start Web Server specification', () => {
 
 /////////////////////////////////////////////////////////////////////////////////////
 describe('The sample web page', () => {
+   const getTags = (elems) => [...elems].map(elem => elem.nodeName.toLowerCase());
    let web;  //fields: url, dom, window, document, title, html, $, verbose
    before(() => serverListening.loadWebPage(http.url + webPath).then(webInst => web = webInst));
    after(() =>  serverListening.closeWebPage(web));
@@ -31,13 +32,15 @@ describe('The sample web page', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has exactly one header, main, and footer', () => {
-      const actual = {
-         header: web.$('body >header').length,
-         main:   web.$('body >main').length,
-         footer: web.$('body >footer').length,
-         };
-      const expected = { header: 1, main: 1, footer: 1 };
+   it('has a body with exactly one header, main, and footer -- body.children', () => {
+      const actual =   getTags(web.document.body.children);
+      const expected = ['header', 'main', 'footer'];
+      assertDeepStrictEqual(actual, expected);
+      });
+
+   it('has a body with exactly one header, main, and footer -- querySelectorAll()', () => {
+      const actual =   getTags(web.document.querySelectorAll('body >*'));
+      const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);
       });
 
