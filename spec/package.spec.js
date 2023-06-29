@@ -15,8 +15,7 @@ describe('The "dist" folder', () => {
       const actual =   fs.readdirSync('dist').sort();
       const expected = [
          'server-listening.d.ts',
-         'server-listening.js',
-         'server-listening.umd.cjs',
+         'server-listening.js'
          ];
       assertDeepStrictEqual(actual, expected);
       });

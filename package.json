@@ -5,15 +5,14 @@
    "license": "MIT",
    "type": "module",
    "module": "dist/server-listening.js",
-   "main": "dist/server-listening.umd.cjs",
+   "main": "dist/server-listening.js",
    "types": "dist/server-listening.d.ts",
    "files": [
       "dist"
    ],
    "exports": {
       ".": {
-         "import": "./dist/server-listening.js",
-         "require": "./dist/server-listening.umd.cjs"
+         "import": "./dist/server-listening.js"
       },
       "./": "./dist/"
    },
@@ -72,8 +71,6 @@
          "jshint . --exclude-path .gitignore",
          "eslint --max-warnings 0 . --ext .ts",
          "tsc",
-         "tsc --module UMD --outDir build/umd",
-         "copy-file build/umd/server-listening.js build/server-listening.umd.cjs",
          "add-dist-header build dist",
          "html-validator"
       ]

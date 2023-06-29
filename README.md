@@ -20,10 +20,6 @@ Import package:
 ```javascript
 import { serverListening } from 'server-listening';
 ```
-Or if using the older CommonJS format:
-```javascript
-const { serverListening } = require('server-listening');  //deprecated -- use ES modules instead
-```
 
 ## B) Usage
 Three primary tools:
