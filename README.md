@@ -5,7 +5,6 @@ _Simple promise to wait for server ready or DOM ready inside a mocha specificati
 
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/center-key/server-listening/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/server-listening.svg)](https://www.npmjs.com/package/server-listening)
-[![Vulnerabilities](https://snyk.io/test/github/center-key/server-listening/badge.svg)](https://snyk.io/test/github/center-key/server-listening)
 [![Build](https://github.com/center-key/server-listening/workflows/build/badge.svg)](https://github.com/center-key/server-listening/actions/workflows/run-spec-on-push.yaml)
 
 **server-listening** is a lightweight helper utility to reduce the amount of boilerplate code
