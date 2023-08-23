@@ -11,13 +11,11 @@ export type ServerListeningSettings = {
    port: number,  //0 = find unused port
    name: string,  //environment variable to pass port number
    };
-export type ServerListeningOptions = Partial<ServerListeningSettings>;
 export type StartWebServerSettings = {
    folder:  string,
    port:    number,
    verbose: boolean,
    };
-export type StartWebServerOptions = Partial<StartWebServerSettings>;
 export type Http = {
    server:     Server,
    terminator: httpTerminator.HttpTerminator,
@@ -30,7 +28,6 @@ export type LoadWebPageSettings = {
    jsdom:   BaseOptions,
    verbose: boolean,
    };
-export type LoadWebPageOptions = Partial<LoadWebPageSettings>;
 export type Web = {
    url:      string,
    dom:      JSDOM,
@@ -43,7 +40,7 @@ export type Web = {
    };
 
 const serverListening = {
-   setPort(options?: ServerListeningOptions): number {
+   setPort(options?: Partial<ServerListeningSettings>): number {
       const defaults = {
          port:  0,  //port 0 to find unused port
          name: 'port',
@@ -77,7 +74,7 @@ const serverListening = {
       console.log('  [' + timestamp + ']', ...args);
       return timestamp;
       },
-   startWebServer(options?: StartWebServerOptions): Promise<Http> {
+   startWebServer(options?: Partial<StartWebServerSettings>): Promise<Http> {
       const defaults = {
          folder:  '.',
          port:    0,
@@ -107,7 +104,7 @@ const serverListening = {
    shutdownWebServer(http: Http): Promise<void> {
       return http.terminator.terminate();
       },
-   loadWebPage(url: string, options?: LoadWebPageOptions): Promise<Web> {
+   loadWebPage(url: string, options?: Partial<LoadWebPageSettings>): Promise<Web> {
       const jsdomOptions: BaseOptions = {
          resources:  'usable',
          runScripts: 'dangerously',
