@@ -16,7 +16,7 @@ describe('Start Web Server specification', () => {
 /////////////////////////////////////////////////////////////////////////////////////
 describe('The sample web page', () => {
    const getTags = (elems) => [...elems].map(elem => elem.nodeName.toLowerCase());
-   let web;  //fields: url, dom, window, document, title, html, $, verbose
+   let web;  //fields: url, dom, window, document, title, html, verbose
    before(() => serverListening.loadWebPage(http.url + webPath).then(webInst => web = webInst));
    after(() =>  serverListening.closeWebPage(web));
 

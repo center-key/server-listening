@@ -3,7 +3,6 @@
 import { AddressInfo } from 'net';
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
-import cheerio        from 'cheerio';
 import express        from 'express';
 import httpTerminator from 'http-terminator';
 
@@ -35,7 +34,6 @@ export type Web = {
    document: Document,
    title:    string,
    html:     string,
-   $:        cheerio.Root,  //library for parsing and manipulating HTML
    verbose:  boolean,
    };
 
@@ -120,7 +118,6 @@ const serverListening = {
          document: jsdom.window.document,
          title:    jsdom.window.document.title,
          html:     jsdom.window.document.documentElement.outerHTML,
-         $:        cheerio.load(jsdom.window.document.documentElement.outerHTML),
          verbose:  settings.verbose,
          });
       return JSDOM.fromURL(url, settings.jsdom)

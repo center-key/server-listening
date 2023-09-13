@@ -6,7 +6,7 @@ import { serverListening } from '../dist/server-listening.js';
 
 // Setup
 const url = 'https://pretty-print-json.js.org/';
-let web;  //fields: url, dom, window, document, title, html, $, verbose
+let web;  //fields: url, dom, window, document, title, html, verbose
 
 describe('Load Web Page specification', () => {
    before(() => serverListening.loadWebPage(url).then(webInst => web = webInst));

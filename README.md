@@ -43,7 +43,7 @@ Mocha's default timeout is 2,000 milliseconds which often is not enough time for
 Use the `--timeout` flag to help avoid this problem:
 ```json
 "scripts": {
-   "test": "mocha *.spec.js --timeout 5000"
+   "test": "mocha *.spec.js --timeout 7000"
 }
 ```
 
@@ -79,7 +79,7 @@ import { serverListening } from 'server-listening';
 
 // Setup
 const url = 'https://pretty-print-json.js.org/';
-let web;  //fields: url, dom, window, document, title, html, $, verbose
+let web;  //fields: url, dom, window, document, title, html, verbose
 const loadWebPage =  () => serverListening.loadWebPage(url).then(webInst => web = webInst);
 const closeWebPage = () => serverListening.closeWebPage(web);
 
