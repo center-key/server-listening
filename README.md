@@ -89,13 +89,13 @@ describe('The web page', () => {
    before(loadWebPage);
    after(closeWebPage);
 
-   it('has the correct URL -> ' + url, () => {
+   it('has the correct URL', () => {
       const actual =   { url: web.window.location.href };
       const expected = { url: url };
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has a body with exactly one header, main, and footer', () => {
+   it('body has exactly one header, main, and footer', () => {
       const actual =   getTags(web.document.querySelectorAll('body >*'));
       const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);
@@ -121,7 +121,7 @@ Above mocha test will output:
 ```
   The web page
     ✓ has the correct URL -> https://pretty-print-json.js.org/
-    ✓ has a body with exactly one header, main, and footer
+    ✓ body has exactly one header, main, and footer
 
   The document content
     ✓ has a 🚀 traveling to 🪐!

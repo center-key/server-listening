@@ -32,13 +32,13 @@ describe('The sample web page', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has a body with exactly one header, main, and footer -- body.children', () => {
+   it('body has exactly one header, main, and footer -- body.children', () => {
       const actual =   getTags(web.document.body.children);
       const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has a body with exactly one header, main, and footer -- querySelectorAll()', () => {
+   it('body has exactly one header, main, and footer -- querySelectorAll()', () => {
       const actual =   getTags(web.document.querySelectorAll('body >*'));
       const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);

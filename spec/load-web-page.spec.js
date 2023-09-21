@@ -16,7 +16,7 @@ describe('Load Web Page specification', () => {
 describe('The web page', () => {
    const getTags = (elems) => [...elems].map(elem => elem.nodeName.toLowerCase());
 
-   it('has the correct URL -> ' + url, () => {
+   it('has the correct URL', () => {
       const actual =   { url: web.window.location.href };
       const expected = { url: url };
       assertDeepStrictEqual(actual, expected);
@@ -28,13 +28,13 @@ describe('The web page', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has a body with exactly one header, main, and footer -- body.children', () => {
+   it('body has exactly one header, main, and footer -- body.children', () => {
       const actual =   getTags(web.document.body.children);
       const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has a body with exactly one header, main, and footer -- querySelectorAll()', () => {
+   it('body has exactly one header, main, and footer -- querySelectorAll()', () => {
       const actual =   getTags(web.document.querySelectorAll('body >*'));
       const expected = ['header', 'main', 'footer'];
       assertDeepStrictEqual(actual, expected);

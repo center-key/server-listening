@@ -105,6 +105,6 @@
       "rimraf": "~5.0",
       "run-scripts-util": "~1.2",
       "typescript": "~5.2",
-      "w3c-html-validator": "~1.4"
+      "w3c-html-validator": "~1.5"
    }
 }
