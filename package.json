@@ -16,7 +16,10 @@
       },
       "./": "./dist/"
    },
-   "repository": "github:center-key/server-listening",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/center-key/server-listening.git"
+   },
    "homepage": "https://github.com/center-key/server-listening",
    "bugs": "https://github.com/center-key/server-listening/issues",
    "docs": "https://github.com/center-key/server-listening#readme",
@@ -98,7 +101,7 @@
       "assert-deep-strict-equal": "~1.1",
       "copy-file-util": "~1.1",
       "copy-folder-util": "~1.1",
-      "eslint": "~8.49",
+      "eslint": "~8.50",
       "fetch-json": "~3.2",
       "jshint": "~2.13",
       "mocha": "~10.2",

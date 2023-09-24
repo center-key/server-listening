@@ -5,7 +5,10 @@
    "license": "MIT",
    "type": "module",
    "main": "server.js",
-   "repository": "github:center-key/hello-world",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/center-key/hello-world.git"
+   },
    "jshintConfig": {
       "esversion": 11,
       "strict": "implied",
