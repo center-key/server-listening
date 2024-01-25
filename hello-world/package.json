@@ -4,7 +4,8 @@
    "version": "0.0.0",
    "license": "MIT",
    "type": "module",
-   "main": "server.js",
+   "module": "server.js",
+   "exports": "./server.js",
    "repository": {
       "type": "git",
       "url": "git+https://github.com/center-key/hello-world.git"
@@ -27,7 +28,7 @@
    },
    "devDependencies": {
       "assert-deep-strict-equal": "~1.1",
-      "fetch-json": "~3.2",
+      "fetch-json": "~3.3",
       "jshint": "~2.13",
       "mocha": "~10.2",
       "server-listening": "~1.2"

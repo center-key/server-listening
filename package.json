@@ -5,17 +5,11 @@
    "license": "MIT",
    "type": "module",
    "module": "dist/server-listening.js",
-   "main": "dist/server-listening.js",
    "types": "dist/server-listening.d.ts",
+   "exports": "./dist/server-listening.js",
    "files": [
       "dist"
    ],
-   "exports": {
-      ".": {
-         "import": "./dist/server-listening.js"
-      },
-      "./": "./dist/"
-   },
    "repository": {
       "type": "git",
       "url": "git+https://github.com/center-key/server-listening.git"
@@ -89,20 +83,20 @@
    "dependencies": {
       "express": "~4.18",
       "http-terminator": "~3.2",
-      "jsdom": "~23.0"
+      "jsdom": "~24.0"
    },
    "devDependencies": {
       "@types/express": "~4.17",
       "@types/jsdom": "~21.1",
-      "@types/node": "~20.10",
-      "@typescript-eslint/eslint-plugin": "~6.17",
-      "@typescript-eslint/parser": "~6.17",
+      "@types/node": "~20.11",
+      "@typescript-eslint/eslint-plugin": "~6.19",
+      "@typescript-eslint/parser": "~6.19",
       "add-dist-header": "~1.3",
       "assert-deep-strict-equal": "~1.1",
       "copy-file-util": "~1.1",
       "copy-folder-util": "~1.1",
       "eslint": "~8.56",
-      "fetch-json": "~3.2",
+      "fetch-json": "~3.3",
       "jshint": "~2.13",
       "mocha": "~10.2",
       "rimraf": "~5.0",
