@@ -24,7 +24,7 @@
       "test": "mocha *.spec.js --timeout 7000 --retries 1"
    },
    "dependencies": {
-      "express": "~4.19.2"
+      "express": "~4.19"
    },
    "devDependencies": {
       "assert-deep-strict-equal": "~1.2",
