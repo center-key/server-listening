@@ -1,4 +1,4 @@
-//! server-listening v1.2.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.2.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
@@ -21,9 +21,9 @@ const serverListening = {
         return new Promise(resolve => server.close(resolve));
     },
     jsdomOnLoad(dom) {
-        const name = dom && dom.constructor && dom.constructor.name;
+        const name = dom?.constructor?.name;
         if (name !== 'JSDOM')
-            throw Error(`[server-listening] Unable to load DOM: ${name} => ${String(dom)}`);
+            throw new Error(`[server-listening] Unable to load DOM: ${String(dom)} => ${name}`);
         let done;
         dom.window.onload = () => done(dom);
         return new Promise(resolve => done = resolve);
