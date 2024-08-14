@@ -55,15 +55,15 @@ const serverListening = {
       return new Promise(resolve => server.close(resolve));
       },
    jsdomOnLoad(dom: JSDOM): Promise<JSDOM> {
-      const name = dom && dom.constructor && dom.constructor.name;
+      const name = (<unknown>dom)?.constructor?.name;
       if (name !== 'JSDOM')
-         throw Error(`[server-listening] Unable to load DOM: ${name} => ${String(dom)}`);
+         throw new Error(`[server-listening] Unable to load DOM: ${String(dom)} => ${name}`);
       let done: (jsdom: JSDOM) => void;
       dom.window.onload = () => done(dom);
       return new Promise(resolve => done = resolve);
       },
    jsdomCloseWindow(dom: JSDOM): Promise<JSDOM> {
-      if (dom)
+      if (<unknown>dom)
          dom.window.close();
       return new Promise(resolve => resolve(dom));
       },
