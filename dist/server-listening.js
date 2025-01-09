@@ -1,4 +1,4 @@
-//! server-listening v1.2.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.2.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';

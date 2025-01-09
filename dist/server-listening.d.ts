@@ -1,4 +1,4 @@
-//! server-listening v1.2.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.2.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
