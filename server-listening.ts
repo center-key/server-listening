@@ -57,7 +57,7 @@ const serverListening = {
    jsdomOnLoad(dom: JSDOM): Promise<JSDOM> {
       const name = (<unknown>dom)?.constructor?.name;
       if (name !== 'JSDOM')
-         throw new Error(`[server-listening] Unable to load DOM: ${String(dom)} => ${name}`);
+         throw new Error(`[server-listening] Unable to load DOM: ${String(<unknown>dom)} => ${name}`);
       let done: (jsdom: JSDOM) => void;
       dom.window.onload = () => done(dom);
       return new Promise(resolve => done = resolve);

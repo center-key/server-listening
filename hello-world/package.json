@@ -30,7 +30,7 @@
       "assert-deep-strict-equal": "~1.2",
       "fetch-json": "~3.3",
       "jshint": "~2.13",
-      "mocha": "~10.7",
+      "mocha": "~11.0",
       "server-listening": "~1.2"
    }
 }
