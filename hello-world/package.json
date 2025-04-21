@@ -24,13 +24,13 @@
       "test": "mocha *.spec.js --timeout 7000 --retries 1"
    },
    "dependencies": {
-      "express": "~4.21"
+      "express": "~5.1"
    },
    "devDependencies": {
       "assert-deep-strict-equal": "~1.2",
       "fetch-json": "~3.3",
       "jshint": "~2.13",
-      "mocha": "~11.0",
+      "mocha": "~11.1",
       "server-listening": "~1.2"
    }
 }
