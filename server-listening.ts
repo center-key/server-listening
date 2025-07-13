@@ -69,7 +69,7 @@ const serverListening = {
       },
    log(...args: unknown[]): string {
       const timestamp = new Date().toISOString();
-      console.log('  [' + timestamp + ']', ...args);
+      console.info('  [' + timestamp + ']', ...args);
       return timestamp;
       },
    startWebServer(options?: Partial<StartWebServerSettings>): Promise<Http> {

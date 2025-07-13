@@ -13,8 +13,8 @@ app.get('/', (request, response) => response.json({ message: 'Hello, World!' }))
 
 // Server
 const server = app.listen(port);
-server.on('listening', () => console.log('  --- server listening on port:', server.address().port));
-server.on('close',     () => console.log('  --- server shutdown'));
+server.on('listening', () => console.info('  --- server listening on port:', server.address().port));
+server.on('close',     () => console.info('  --- server shutdown'));
 
 // Module
 export { server };
