@@ -130,7 +130,7 @@ Example of loading a web page into jsdom from a local node server:<br>
 https://github.com/dna-engine/data-dashboard/blob/main/spec/spec.js
 
 ### 5. TypeScript declarations
-See the TypeScript declarations at the top of the [server-listening.ts](server-listening.ts) file.
+See the TypeScript declarations at the top of the [src/server-listening.ts](src/server-listening.ts) file.
 
 The declarations provide type information about the API, such as the options for calling
 `serverListening.setPort()`:
