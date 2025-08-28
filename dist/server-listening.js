@@ -1,4 +1,4 @@
-//! server-listening v1.2.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
@@ -35,7 +35,7 @@ const serverListening = {
     },
     log(...args) {
         const timestamp = new Date().toISOString();
-        console.log('  [' + timestamp + ']', ...args);
+        console.info('  [' + timestamp + ']', ...args);
         return timestamp;
     },
     startWebServer(options) {
@@ -77,6 +77,7 @@ const serverListening = {
         const settings = { ...defaults, ...options };
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
+        const clearQueue = (jsdom) => new Promise(resolve => setTimeout(() => resolve(jsdom)));
         const web = (jsdom) => ({
             url: url,
             dom: jsdom,
@@ -88,6 +89,7 @@ const serverListening = {
         });
         return JSDOM.fromURL(url, settings.jsdom)
             .then(serverListening.jsdomOnLoad)
+            .then(clearQueue)
             .then(jsdom => web(jsdom));
     },
     closeWebPage(web) {
