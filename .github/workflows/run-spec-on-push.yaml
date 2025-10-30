@@ -1,3 +1,5 @@
+# server-listening
+
 name: Build and Test
 
 on: [push]
@@ -5,8 +7,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      w3cHtmlValidator: dry-run  #only run html validation locally
     steps:
-      - uses: actions/checkout@v4    #see: https://github.com/actions/checkout/releases
+      - uses: actions/checkout@v5    #see: https://github.com/actions/checkout/releases
       - uses: actions/setup-node@v4  #see: https://github.com/actions/setup-node/releases
       - run: npm install
       - run: npm test
