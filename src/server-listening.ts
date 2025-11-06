@@ -38,8 +38,14 @@ export type Web = {
    };
 
 const serverListening = {
+
+   assert(ok: unknown, message: string | null) {
+      if (!ok)
+         throw new Error(`[server-listening] ${message}`);
+      },
+
    setPort(options?: Partial<ServerListeningSettings>): number {
-      const defaults = {
+      const defaults: ServerListeningSettings = {
          port:  0,  //port 0 to find unused port
          name: 'port',
          };
@@ -47,33 +53,38 @@ const serverListening = {
       process.env[settings.name] = String(settings.port);
       return settings.port;
       },
+
    ready(server: Server): Promise<Server> {
       const waitForReady = (done: (value: Server) => void): Server => server.on('listening', done);
       return new Promise(resolve => server.listening ? resolve(server) : waitForReady(resolve));
       },
+
    close(server: Server): Promise<Server | Error | undefined> {
       return new Promise(resolve => server.close(resolve));
       },
+
    jsdomOnLoad(dom: JSDOM): Promise<JSDOM> {
       const name = (<unknown>dom)?.constructor?.name;
-      if (name !== 'JSDOM')
-         throw new Error(`[server-listening] Unable to load DOM: ${String(<unknown>dom)} => ${name}`);
+      serverListening.assert(name === 'JSDOM', `Unable to load DOM: ${<unknown>dom} => ${name}`);
       let done: (jsdom: JSDOM) => void;
       dom.window.onload = () => done(dom);
       return new Promise(resolve => done = resolve);
       },
+
    jsdomCloseWindow(dom: JSDOM): Promise<JSDOM> {
       if (<unknown>dom)
          dom.window.close();
       return new Promise(resolve => resolve(dom));
       },
+
    log(...args: unknown[]): string {
       const timestamp = new Date().toISOString();
       console.info('  [' + timestamp + ']', ...args);
       return timestamp;
       },
+
    startWebServer(options?: Partial<StartWebServerSettings>): Promise<Http> {
-      const defaults = {
+      const defaults: StartWebServerSettings = {
          folder:  '.',
          port:    0,
          verbose: true,
@@ -99,15 +110,20 @@ const serverListening = {
          server.on('listening', logListening).on('close', logClose);
       return new Promise(resolve => done = resolve);
       },
+
    shutdownWebServer(http: Http): Promise<void> {
       return http.terminator.terminate();
       },
+
    loadWebPage(url: string, options?: Partial<LoadWebPageSettings>): Promise<Web> {
       const jsdomOptions: BaseOptions = {
          resources:  'usable',
          runScripts: 'dangerously',
          };
-      const defaults = { jsdom: jsdomOptions, verbose: true };
+      const defaults: LoadWebPageSettings = {
+         jsdom:   jsdomOptions,
+         verbose: true,
+         };
       const settings = { ...defaults, ...options };
       if (settings.verbose)
          serverListening.log('Web Page - loading:', url);
@@ -127,12 +143,14 @@ const serverListening = {
          .then(clearQueue)
          .then(jsdom => web(jsdom));
       },
+
    closeWebPage(web: Web): Promise<Web> {
       if (web.verbose)
          serverListening.log('Web Page - closing:', web.url);
       web.window.close();
       return new Promise(resolve => resolve(web));
       },
+
    };
 
 export { serverListening };

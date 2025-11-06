@@ -32,7 +32,7 @@ describe('The server-listening package', () => {
       });
 
    it('contains the expected functions', () => {
-      const names = ['setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow',
+      const names = ['assert', 'setPort', 'ready', 'close', 'jsdomOnLoad', 'jsdomCloseWindow',
          'log', 'startWebServer', 'shutdownWebServer', 'loadWebPage', 'closeWebPage'];
       const actual =   { functions: Object.keys(serverListening).sort() };
       const expected = { functions: names.sort() };
