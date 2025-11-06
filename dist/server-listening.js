@@ -1,9 +1,13 @@
-//! server-listening v1.3.0 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.1 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
 import httpTerminator from 'http-terminator';
 const serverListening = {
+    assert(ok, message) {
+        if (!ok)
+            throw new Error(`[server-listening] ${message}`);
+    },
     setPort(options) {
         const defaults = {
             port: 0,
@@ -22,8 +26,7 @@ const serverListening = {
     },
     jsdomOnLoad(dom) {
         const name = dom?.constructor?.name;
-        if (name !== 'JSDOM')
-            throw new Error(`[server-listening] Unable to load DOM: ${String(dom)} => ${name}`);
+        serverListening.assert(name === 'JSDOM', `Unable to load DOM: ${dom} => ${name}`);
         let done;
         dom.window.onload = () => done(dom);
         return new Promise(resolve => done = resolve);
@@ -73,7 +76,10 @@ const serverListening = {
             resources: 'usable',
             runScripts: 'dangerously',
         };
-        const defaults = { jsdom: jsdomOptions, verbose: true };
+        const defaults = {
+            jsdom: jsdomOptions,
+            verbose: true,
+        };
         const settings = { ...defaults, ...options };
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
