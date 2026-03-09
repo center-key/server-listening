@@ -1,30 +1,34 @@
-// Mocha Specification Suite
+// Start Web Server Specification Suite
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { serverListening } from '../dist/server-listening.js';
 
 // Setup
-const url = 'https://pretty-print-json.js.org/';
-let web;  //fields: url, dom, window, document, title, html, verbose
+const options = { folder: 'spec/fixtures' };
+const webPath = 'sample.html';
+let http;  //fields: server, terminator, folder, url, port, verbose
 
-describe('Load Web Page specification', () => {
-   before(() => serverListening.loadWebPage(url).then(webInst => web = webInst));
-   after(() =>  serverListening.closeWebPage(web));
+describe('Start Web Server specification', () => {
+   before(() => serverListening.startWebServer(options).then(httpInst => http = httpInst));
+   after(() =>  serverListening.shutdownWebServer(http));
 
 /////////////////////////////////////////////////////////////////////////////////////
-describe('The web page', () => {
+describe('The sample web page', () => {
    const getTags = (elems) => [...elems].map(elem => elem.nodeName.toLowerCase());
+   let web;  //fields: url, dom, window, document, title, html, verbose
+   before(() => serverListening.loadWebPage(http.url + webPath).then(webInst => web = webInst));
+   after(() =>  serverListening.closeWebPage(web));
 
    it('has the correct URL', () => {
       const actual =   { url: web.window.location.href };
-      const expected = { url: url };
+      const expected = { url: http.url + webPath };
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('title starts with "Pretty-Print JSON"', () => {
-      const actual =   { title: web.title.substring(0, 'Pretty-Print JSON'.length) };
-      const expected = { title: 'Pretty-Print JSON' };
+   it('title is "Sample Web Page"', () => {
+      const actual =   { title: web.title };
+      const expected = { title: 'Sample Web Page' };
       assertDeepStrictEqual(actual, expected);
       });
 
@@ -37,17 +41,6 @@ describe('The web page', () => {
    it('body has exactly one header, main, and footer -- querySelectorAll()', () => {
       const actual =   getTags(web.document.querySelectorAll('body >*'));
       const expected = ['header', 'main', 'footer'];
-      assertDeepStrictEqual(actual, expected);
-      });
-
-   });
-
-/////////////////////////////////////////////////////////////////////////////////////
-describe('The document content', () => {
-
-   it('has a 🚀 traveling to 🪐!', () => {
-      const actual =   { '🚀': !!web.html.match(/🚀/g), '🪐': !!web.html.match(/🪐/g) };
-      const expected = { '🚀': true,                     '🪐': true };
       assertDeepStrictEqual(actual, expected);
       });
 

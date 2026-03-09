@@ -1,4 +1,4 @@
-// Mocha Specification Suite
+// Package Specification Suite
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
