@@ -39,7 +39,7 @@ export type Web = {
 
 const serverListening = {
 
-   assert(ok: unknown, message: string | null) {
+   assertOk(ok: unknown, message: string | null) {
       if (!ok)
          throw new Error(`[server-listening] ${message}`);
       },
@@ -65,7 +65,7 @@ const serverListening = {
 
    jsdomOnLoad(dom: JSDOM): Promise<JSDOM> {
       const name = (<unknown>dom)?.constructor?.name;
-      serverListening.assert(name === 'JSDOM', `Unable to load DOM: ${<unknown>dom} => ${name}`);
+      serverListening.assertOk(name === 'JSDOM', `Unable to load DOM: ${<unknown>dom} => ${name}`);
       let done: (jsdom: JSDOM) => void;
       dom.window.onload = () => done(dom);
       return new Promise(resolve => done = resolve);
