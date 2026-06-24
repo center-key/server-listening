@@ -2,9 +2,9 @@
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
-import { serverListening } from '../dist/server-listening.js';
 
 // Setup
+import { serverListening } from '../dist/server-listening.js';
 const options = { folder: 'spec/fixtures' };
 const webPath = 'sample.html';
 let http;  //fields: server, terminator, folder, url, port, verbose

@@ -39,6 +39,8 @@ export type Web = {
 
 const serverListening = {
 
+   version: '{{package.version}}',
+
    assertOk(ok: unknown, message: string | null) {
       if (!ok)
          throw new Error(`[server-listening] ${message}`);
