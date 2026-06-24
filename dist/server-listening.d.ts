@@ -1,4 +1,4 @@
-//! server-listening v1.3.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
@@ -34,7 +34,8 @@ export type Web = {
     verbose: boolean;
 };
 declare const serverListening: {
-    assert(ok: unknown, message: string | null): void;
+    version: string;
+    assertOk(ok: unknown, message: string | null): void;
     setPort(options?: Partial<ServerListeningSettings>): number;
     ready(server: Server): Promise<Server>;
     close(server: Server): Promise<Server | Error | undefined>;

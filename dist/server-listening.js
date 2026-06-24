@@ -1,10 +1,11 @@
-//! server-listening v1.3.2 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
 import httpTerminator from 'http-terminator';
 const serverListening = {
-    assert(ok, message) {
+    version: '1.3.3',
+    assertOk(ok, message) {
         if (!ok)
             throw new Error(`[server-listening] ${message}`);
     },
@@ -26,7 +27,7 @@ const serverListening = {
     },
     jsdomOnLoad(dom) {
         const name = dom?.constructor?.name;
-        serverListening.assert(name === 'JSDOM', `Unable to load DOM: ${dom} => ${name}`);
+        serverListening.assertOk(name === 'JSDOM', `Unable to load DOM: ${dom} => ${name}`);
         let done;
         dom.window.onload = () => done(dom);
         return new Promise(resolve => done = resolve);
