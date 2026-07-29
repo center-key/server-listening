@@ -130,7 +130,7 @@ const serverListening = {
       if (settings.verbose)
          serverListening.log('Web Page - loading:', url);
       const clearQueue = (jsdom: JSDOM) =>  //clear out items already in the event loop
-         new Promise<JSDOM>(resolve => setTimeout(() => resolve(jsdom)));
+         new Promise<JSDOM>(resolve => setTimeout(() => resolve(jsdom), 300));
       const web = (jsdom: JSDOM) => ({
          url:      url,
          dom:      jsdom,
