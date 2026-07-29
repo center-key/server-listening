@@ -1,10 +1,10 @@
-//! server-listening v1.3.3 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
 import httpTerminator from 'http-terminator';
 const serverListening = {
-    version: '1.3.3',
+    version: '1.3.4',
     assertOk(ok, message) {
         if (!ok)
             throw new Error(`[server-listening] ${message}`);
@@ -84,7 +84,7 @@ const serverListening = {
         const settings = { ...defaults, ...options };
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
-        const clearQueue = (jsdom) => new Promise(resolve => setTimeout(() => resolve(jsdom)));
+        const clearQueue = (jsdom) => new Promise(resolve => setTimeout(() => resolve(jsdom), 300));
         const web = (jsdom) => ({
             url: url,
             dom: jsdom,
