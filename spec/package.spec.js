@@ -52,6 +52,7 @@ describe('Library module', () => {
       const actual = Object.keys(module).sort().map(key => [key, typeof module[key]]);
       const expected = [
          ['assertOk',          'function'],
+         ['clearQueue',        'function'],
          ['close',             'function'],
          ['closeWebPage',      'function'],
          ['jsdomCloseWindow',  'function'],

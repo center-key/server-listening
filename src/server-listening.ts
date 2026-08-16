@@ -117,6 +117,11 @@ const serverListening = {
       return http.terminator.terminate();
       },
 
+   clearQueue<T>(result: T): Promise<T> {
+      // Requeue promise to clear out items already in the event loop
+      return new Promise<T>(resolve => setTimeout(() => resolve(result), 300));
+      },
+
    loadWebPage(url: string, options?: Partial<LoadWebPageSettings>): Promise<Web> {
       const jsdomOptions: BaseOptions = {
          resources:  'usable',
@@ -129,8 +134,6 @@ const serverListening = {
       const settings = { ...defaults, ...options };
       if (settings.verbose)
          serverListening.log('Web Page - loading:', url);
-      const clearQueue = (jsdom: JSDOM) =>  //clear out items already in the event loop
-         new Promise<JSDOM>(resolve => setTimeout(() => resolve(jsdom), 300));
       const web = (jsdom: JSDOM) => ({
          url:      url,
          dom:      jsdom,
@@ -142,7 +145,7 @@ const serverListening = {
          });
       return JSDOM.fromURL(url, settings.jsdom)
          .then(serverListening.jsdomOnLoad)
-         .then(clearQueue)
+         .then(serverListening.clearQueue)
          .then(jsdom => web(jsdom));
       },
 
@@ -150,7 +153,7 @@ const serverListening = {
       if (web.verbose)
          serverListening.log('Web Page - closing:', web.url);
       web.window.close();
-      return new Promise(resolve => resolve(web));
+      return serverListening.clearQueue(web)
       },
 
    };
