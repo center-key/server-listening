@@ -1,4 +1,4 @@
-//! server-listening v1.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM, BaseOptions, DOMWindow } from 'jsdom';
 import { Server } from 'http';
@@ -44,6 +44,7 @@ declare const serverListening: {
     log(...args: unknown[]): string;
     startWebServer(options?: Partial<StartWebServerSettings>): Promise<Http>;
     shutdownWebServer(http: Http): Promise<void>;
+    clearQueue<T>(result: T): Promise<T>;
     loadWebPage(url: string, options?: Partial<LoadWebPageSettings>): Promise<Web>;
     closeWebPage(web: Web): Promise<Web>;
 };

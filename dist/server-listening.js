@@ -1,10 +1,10 @@
-//! server-listening v1.3.4 ~~ https://github.com/center-key/server-listening ~~ MIT License
+//! server-listening v1.3.5 ~~ https://github.com/center-key/server-listening ~~ MIT License
 
 import { JSDOM } from 'jsdom';
 import express from 'express';
 import httpTerminator from 'http-terminator';
 const serverListening = {
-    version: '1.3.4',
+    version: '1.3.5',
     assertOk(ok, message) {
         if (!ok)
             throw new Error(`[server-listening] ${message}`);
@@ -72,6 +72,9 @@ const serverListening = {
     shutdownWebServer(http) {
         return http.terminator.terminate();
     },
+    clearQueue(result) {
+        return new Promise(resolve => setTimeout(() => resolve(result), 300));
+    },
     loadWebPage(url, options) {
         const jsdomOptions = {
             resources: 'usable',
@@ -84,7 +87,6 @@ const serverListening = {
         const settings = { ...defaults, ...options };
         if (settings.verbose)
             serverListening.log('Web Page - loading:', url);
-        const clearQueue = (jsdom) => new Promise(resolve => setTimeout(() => resolve(jsdom), 300));
         const web = (jsdom) => ({
             url: url,
             dom: jsdom,
@@ -96,14 +98,14 @@ const serverListening = {
         });
         return JSDOM.fromURL(url, settings.jsdom)
             .then(serverListening.jsdomOnLoad)
-            .then(clearQueue)
+            .then(serverListening.clearQueue)
             .then(jsdom => web(jsdom));
     },
     closeWebPage(web) {
         if (web.verbose)
             serverListening.log('Web Page - closing:', web.url);
         web.window.close();
-        return new Promise(resolve => resolve(web));
+        return serverListening.clearQueue(web);
     },
 };
 export { serverListening };
