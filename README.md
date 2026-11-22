@@ -29,7 +29,7 @@ Three primary tools:
 (for similar functionality using Puppeteer instead, see the
 [puppeteer-browser-ready](https://github.com/center-key/puppeteer-browser-ready) project).
 
-### 1. Mocha specification file
+### 1. Mocha Specification File
 ```javascript
 import { server } from '../server.js';
 before(() => serverListening.ready(server));
@@ -47,7 +47,7 @@ Use the `--timeout` flag to help avoid this problem:
 }
 ```
 
-### 2. `setPort()` options
+### 2. `setPort()` Options
 The `setPort(options)` function is just a handy way to set the environment variable for the
 HTTP port.&nbsp; This function is for convenience and is not required.
 ```javascript
@@ -58,7 +58,7 @@ serverListening.setPort({ port: 9000 });
 | **port**  | Port number for server (`0` means choose an unused port). | `0`      |
 | **name**  | Environment variable name to store port number.           | `'port'` |
 
-### 3. Leveraging promises
+### 3. Leveraging Promises
 The `ready(server)` and `close(server)` functions return a
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises), enabling
 chaining of operations.
@@ -69,7 +69,7 @@ let port;
 before(() => serverListening.ready(server).then(() => port = server.address().port));
 ```
 
-### 4. Example for serverListening.loadWebPage(url)
+### 4. Example for `serverListening.loadWebPage(url)`
 ```javascript
 // Mocha Specification Suite
 
@@ -129,7 +129,7 @@ Above mocha test will output:
 Example of loading a web page into jsdom from a local node server:<br>
 https://github.com/dna-dom/data-dashboard/blob/main/spec/spec.js
 
-### 5. TypeScript declarations
+### 5. TypeScript Declarations
 See the TypeScript declarations at the top of the [src/server-listening.ts](src/server-listening.ts) file.
 
 The declarations provide type information about the API, such as the options for calling
